@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import Albums from "@/components/Albums";
 import Singles from "@/components/Singles";
+import Videos from "@/components/Videos";
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import BackgroundAnimation from "@/components/BackgroundAnimation";
@@ -13,6 +14,7 @@ const Index = () => {
         <Hero />
         <Albums />
         <Singles />
+        <Videos />
         <About />
         <Contact />
       </div>
