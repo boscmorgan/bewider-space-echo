@@ -95,11 +95,81 @@ export default {
             transform: "translateY(0)",
           },
         },
+        "float-slow": {
+          "0%, 100%": {
+            transform: "translate(0, 0) rotate(0deg)",
+          },
+          "33%": {
+            transform: "translate(30px, -30px) rotate(120deg)",
+          },
+          "66%": {
+            transform: "translate(-20px, 20px) rotate(240deg)",
+          },
+        },
+        "float-medium": {
+          "0%, 100%": {
+            transform: "translate(0, 0) rotate(0deg)",
+          },
+          "50%": {
+            transform: "translate(20px, 30px) rotate(180deg)",
+          },
+        },
+        "float-slower": {
+          "0%, 100%": {
+            transform: "translate(0, 0) scale(1)",
+          },
+          "50%": {
+            transform: "translate(-40px, 40px) scale(1.1)",
+          },
+        },
+        "scan-down": {
+          "0%": {
+            transform: "translateY(-100%)",
+          },
+          "100%": {
+            transform: "translateY(100vh)",
+          },
+        },
+        "scan-right": {
+          "0%": {
+            transform: "translateX(-100%)",
+          },
+          "100%": {
+            transform: "translateX(100vw)",
+          },
+        },
+        "pulse-slow": {
+          "0%, 100%": {
+            opacity: "0.2",
+            transform: "scale(1)",
+          },
+          "50%": {
+            opacity: "0.4",
+            transform: "scale(1.5)",
+          },
+        },
+        "pulse-slower": {
+          "0%, 100%": {
+            opacity: "0.15",
+            transform: "scale(1)",
+          },
+          "50%": {
+            opacity: "0.3",
+            transform: "scale(1.3)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "blur-fade-in": "blur-fade-in 1s cubic-bezier(0.4, 0, 0.2, 1) forwards",
+        "float-slow": "float-slow 20s ease-in-out infinite",
+        "float-medium": "float-medium 15s ease-in-out infinite",
+        "float-slower": "float-slower 25s ease-in-out infinite",
+        "scan-down": "scan-down 8s linear infinite",
+        "scan-right": "scan-right 10s linear infinite",
+        "pulse-slow": "pulse-slow 4s ease-in-out infinite",
+        "pulse-slower": "pulse-slow 6s ease-in-out infinite",
       },
     },
   },
