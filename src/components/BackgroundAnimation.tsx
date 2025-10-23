@@ -1,6 +1,29 @@
 const BackgroundAnimation = () => {
   return (
     <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+      {/* Animated grain texture */}
+      <div className="absolute inset-0 opacity-[0.15]">
+        <svg className="w-full h-full">
+          <filter id="noise">
+            <feTurbulence 
+              type="fractalNoise" 
+              baseFrequency="0.9" 
+              numOctaves="4" 
+              stitchTiles="stitch"
+            >
+              <animate
+                attributeName="baseFrequency"
+                values="0.9;0.92;0.9"
+                dur="3s"
+                repeatCount="indefinite"
+              />
+            </feTurbulence>
+            <feColorMatrix type="saturate" values="0"/>
+          </filter>
+          <rect width="100%" height="100%" filter="url(#noise)" opacity="0.5" />
+        </svg>
+      </div>
+      
       {/* Floating circles */}
       <div className="absolute top-[10%] left-[15%] w-64 h-64 border border-foreground/5 rounded-full animate-float-slow" />
       <div className="absolute top-[60%] right-[20%] w-96 h-96 border border-foreground/5 rounded-full animate-float-slower" />

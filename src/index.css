@@ -6,6 +6,27 @@
 All colors MUST be HSL.
 */
 
+@font-face {
+  font-family: 'Rois';
+  src: url('/fonts/Rois-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rois';
+  src: url('/fonts/Rois-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Rois';
+  src: url('/fonts/Rois-Black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
 @layer base {
   :root {
     --background: 0 0% 10%;

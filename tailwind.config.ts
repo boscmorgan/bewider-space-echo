@@ -64,7 +64,8 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       fontFamily: {
-        'rois': ['Space Grotesk', 'sans-serif'],
+        'rois': ['Rois', 'sans-serif'],
+        'sans': ['Rois', 'sans-serif'],
       },
       keyframes: {
         "accordion-down": {
