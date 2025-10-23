@@ -1,82 +1,60 @@
-import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { Music } from "lucide-react";
+import { AppleMusicIcon, DolbyAtmosIcon, SpotifyIcon } from "@/components/StreamingIcons";
+import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
+
+const STREAMING_LINKS = [
+  {
+    label: "Spotify",
+    href: "https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw",
+    Icon: SpotifyIcon,
+  },
+  {
+    label: "Apple Music",
+    href: "https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB",
+    Icon: AppleMusicIcon,
+  },
+];
 
 const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-blur-fade-in");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (heroRef.current) {
-      const children = heroRef.current.querySelectorAll(".fade-element");
-      children.forEach((child) => observer.observe(child));
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const heroRef = useRevealOnIntersect<HTMLDivElement>({ selector: ".fade-element" });
 
   return (
-    <section className="min-h-screen relative px-6 py-12 flex flex-col" ref={heroRef}>
-      {/* Top section with title */}
-      <div className="fade-element opacity-0 pt-8" style={{ animationDelay: "0.1s" }}>
-        <h1 className="text-7xl md:text-9xl font-black tracking-wider text-foreground">
-          BEWIDER
-        </h1>
-      </div>
-
-      {/* Subtitle text */}
-      <div className="fade-element opacity-0 mt-6 max-w-2xl" style={{ animationDelay: "0.2s" }}>
-        <p className="text-xs md:text-sm tracking-wider text-muted-foreground uppercase leading-relaxed">
-          Electronic music artist exploring the boundaries between ambient soundscapes and intricate rhythmic patterns
-        </p>
-      </div>
-      
-      {/* Center content with album info */}
-      <div className="flex-1 flex items-center justify-center">
-        <div className="fade-element opacity-0 max-w-sm w-full" style={{ animationDelay: "0.3s" }}>
-          <div className="aspect-square bg-card border border-border mb-6 flex items-center justify-center">
-            <Music className="w-20 h-20 text-muted-foreground" />
+    <section
+      className="relative flex min-h-screen items-center justify-center px-3 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-10 lg:pt-48"
+      ref={heroRef}
+    >
+      <div className="fade-element w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
+        <div className="flex flex-col items-center gap-8">
+          <div className="relative w-full max-w-xl">
+            <img
+              src="/album_latest.webp"
+              alt="Bewider - Another Hero album artwork"
+              className="aspect-square w-full object-cover shadow-[0_35px_80px_-40px_rgba(0,0,0,0.9)]"
+            />
+            <span className="absolute right-4 top-4 inline-flex items-center">
+              <DolbyAtmosIcon className="h-6 w-auto text-white" />
+              <span className="sr-only">Dolby Atmos</span>
+            </span>
           </div>
-          
-          <h2 className="text-sm font-light mb-2 text-center tracking-widest text-muted-foreground">LATEST RELEASE</h2>
-          <h3 className="text-3xl md:text-4xl font-bold mb-6 text-center tracking-wider">ANOTHER HERO</h3>
-          
-          <div className="flex gap-3 justify-center flex-wrap">
-            <Button 
-              variant="outline" 
-              className="bg-transparent border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-300"
-              asChild
-            >
-              <a href="https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw" target="_blank" rel="noopener noreferrer">
-                Spotify
-              </a>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-transparent border-foreground text-foreground hover:bg-foreground hover:text-background transition-all duration-300"
-              asChild
-            >
-              <a href="https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB" target="_blank" rel="noopener noreferrer">
-                Apple Music
-              </a>
-            </Button>
+          <p className="text-xs uppercase tracking-[0.6em] text-white/70 sm:text-sm">
+            Another Hero · Latest EP
+          </p>
+          <div className="flex w-full max-w-xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+            {STREAMING_LINKS.map(({ label, href, Icon }) => (
+              <Button
+                key={label}
+                variant="outline"
+                className="h-12 w-full min-w-[120px] border border-white/50 bg-transparent text-white transition-colors duration-300 hover:bg-white/15 sm:w-auto"
+                asChild
+              >
+                <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Listen on ${label}`}>
+                  <Icon className="!h-5 !w-5 text-white" />
+                  <span className="sr-only">{label}</span>
+                </a>
+              </Button>
+            ))}
           </div>
         </div>
-      </div>
-
-      {/* Bottom scroll indicator */}
-      <div className="fade-element opacity-0 pb-8 text-center" style={{ animationDelay: "0.5s" }}>
-        <p className="text-muted-foreground text-xs tracking-[0.3em]">SCROLL ↓</p>
       </div>
     </section>
   );

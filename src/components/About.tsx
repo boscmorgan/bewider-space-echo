@@ -1,40 +1,45 @@
-import { useEffect, useRef } from "react";
+import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 const About = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-blur-fade-in");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (sectionRef.current) {
-      const children = sectionRef.current.querySelectorAll(".fade-element");
-      children.forEach((child) => observer.observe(child));
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const sectionRef = useRevealOnIntersect<HTMLDivElement>({ selector: ".fade-element" });
 
   return (
-    <section className="px-6 py-20 max-w-4xl mx-auto" ref={sectionRef}>
-      <div className="fade-element opacity-0" style={{ animationDelay: "0.1s" }}>
-        <h2 className="text-5xl md:text-6xl font-bold mb-12 text-center tracking-wider">ABOUT</h2>
-      </div>
-      
-      <div className="fade-element opacity-0" style={{ animationDelay: "0.3s" }}>
-        <p className="text-lg leading-relaxed text-muted-foreground text-center max-w-2xl mx-auto">
-          BEWIDER is an electronic music artist exploring the boundaries between ambient soundscapes and 
-          intricate rhythmic patterns. Through carefully crafted compositions, each release invites listeners 
-          into immersive sonic environments that blur the lines between the organic and the synthetic.
-        </p>
+    <section className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24" ref={sectionRef}>
+      <div className="fade-element opacity-0" style={{ animationDelay: "0.15s" }}>
+        <article className="relative overflow-hidden border border-border/60 bg-background/40 px-6 py-12 sm:px-10 lg:px-14">
+          <div className="absolute inset-y-6 left-4 hidden w-px bg-foreground/30 sm:left-6 lg:block" aria-hidden="true" />
+          <div className="space-y-12 text-left text-base leading-relaxed text-white/80 sm:text-lg lg:ml-12 lg:max-w-4xl">
+            <p className="max-w-2xl text-balance">
+              Bewider is an electronic musician and producer who has spent several years crafting soundtracks and music
+              for media. The first EP, “A Place To Be Safe”, arrived in February 2015 and was widely acclaimed by
+              critics.
+            </p>
+            <div className="grid gap-10 lg:grid-cols-2">
+              <p className="max-w-xl lg:text-balance">
+                In 2016 Bewider released a second EP, “Dissolve”, a collection of organic tracks that blend seamlessly
+                even as they explore heterogeneous styles. The analog and vintage sound palette was an intentional
+                decision, carefully adapted to a modern sensibility.
+              </p>
+              <p className="max-w-xl lg:text-balance">
+                Bewider fluctuates between diverse influences, embracing a broad spectrum that stretches from ambient
+                music infused with electronic elements to electro-dance energy, all woven together with a cinematic,
+                modern touch.
+              </p>
+            </div>
+            <div className="grid gap-10 lg:grid-cols-2">
+              <p className="max-w-xl lg:text-balance">
+                The first full-length album, “Full Panorama”, is an electronic and highly performative body of work. Each
+                track emerged from hands-on manipulations and recordings on analog modular synthesizers, where the rarity
+                of repetition nurtures spontaneity.
+              </p>
+              <p className="max-w-xl lg:text-balance">
+                In 2021 Bewider released “Gymnopedies Rework”, a project realized during the lockdown period. It grew
+                from modular synth experiments that evolved into a fully formed exploration. Erik Satie’s three
+                Gymnopedies have always resonated deeply—captivating melodies that continue to inspire.
+              </p>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
   );

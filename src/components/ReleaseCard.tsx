@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
 import { Music } from "lucide-react";
+import { AppleMusicIcon, BandcampIcon, DolbyAtmosIcon, SpotifyIcon } from "@/components/StreamingIcons";
+import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 interface ReleaseCardProps {
   title: string;
@@ -11,80 +12,63 @@ interface ReleaseCardProps {
 }
 
 const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, delay = 0 }: ReleaseCardProps) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-blur-fade-in");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const cardRef = useRevealOnIntersect<HTMLDivElement>();
 
   return (
-    <div
-      ref={cardRef}
-      className="opacity-0 group relative"
-      style={{ animationDelay: `${delay}s` }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="aspect-square bg-card border border-border flex items-center justify-center overflow-hidden relative transition-all duration-500">
-        <Music className="w-16 h-16 text-muted-foreground transition-all duration-500 group-hover:scale-110" />
+    <div ref={cardRef} className="group relative flex flex-col items-center opacity-0" style={{ animationDelay: `${delay}s` }}>
+      <div className="relative aspect-square w-full max-w-[320px] overflow-hidden border border-border bg-card transition-transform duration-500 group-hover:-translate-y-1">
+        <div className="flex h-full w-full items-center justify-center">
+          <Music className="h-14 w-14 text-muted-foreground transition-transform duration-500 group-hover:scale-110 group-focus-within:scale-110 md:h-16 md:w-16" />
+        </div>
         
         {hasAtmos && (
-          <div className="absolute top-3 right-3 bg-foreground text-background px-2 py-1 text-xs tracking-wider">
-            ATMOS
-          </div>
+          <span className="absolute right-3 top-3 inline-flex items-center">
+            <DolbyAtmosIcon className="h-6 w-auto text-white" />
+            <span className="sr-only">Dolby Atmos</span>
+          </span>
         )}
 
-        <div 
-          className={`absolute inset-0 bg-background/95 flex flex-col items-center justify-center gap-3 transition-all duration-500 ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
+        <div
+          className="pointer-events-auto absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/95 bg-gradient-to-b from-background/90 to-background/80 px-6 text-center opacity-100 transition-all duration-500 md:pointer-events-none md:opacity-0 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100"
         >
           <a
             href={spotify}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm tracking-wider hover:text-muted-foreground transition-colors"
+            aria-label="Listen on Spotify"
+            className="flex w-full items-center justify-center gap-2 border border-white/40 px-4 py-3 text-white transition-colors hover:bg-white/10"
           >
-            SPOTIFY
+            <SpotifyIcon className="!h-5 !w-5 text-white" />
+            <span className="sr-only">Spotify</span>
           </a>
           <a
             href={appleMusic}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm tracking-wider hover:text-muted-foreground transition-colors"
+            aria-label="Listen on Apple Music"
+            className="flex w-full items-center justify-center gap-2 border border-white/40 px-4 py-3 text-white transition-colors hover:bg-white/10"
           >
-            APPLE MUSIC
+            <AppleMusicIcon className="!h-5 !w-5 text-white" />
+            <span className="sr-only">Apple Music</span>
           </a>
           {bandcamp && (
             <a
               href={bandcamp}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-sm tracking-wider hover:text-muted-foreground transition-colors"
+              aria-label="Open on Bandcamp"
+              className="flex w-full items-center justify-center gap-2 border border-white/40 px-4 py-3 text-white transition-colors hover:bg-white/10"
             >
-              BANDCAMP
+              <BandcampIcon className="!h-5 !w-5 text-white" />
+              <span className="sr-only">Bandcamp</span>
             </a>
           )}
         </div>
       </div>
       
-      <h3 className="mt-4 text-lg font-light tracking-wider text-center">{title}</h3>
+      <h3 className="mt-5 text-center text-lg font-light tracking-[0.35em] text-foreground sm:text-xl">
+        {title}
+      </h3>
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animatePlugin from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -170,9 +171,9 @@ export default {
         "scan-down": "scan-down 8s linear infinite",
         "scan-right": "scan-right 10s linear infinite",
         "pulse-slow": "pulse-slow 4s ease-in-out infinite",
-        "pulse-slower": "pulse-slow 6s ease-in-out infinite",
+        "pulse-slower": "pulse-slower 6s ease-in-out infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animatePlugin],
 } satisfies Config;

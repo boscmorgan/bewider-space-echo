@@ -1,6 +1,16 @@
 const BackgroundAnimation = () => {
   return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+    <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+      {/* Blurred album backdrop */}
+      <div className="absolute inset-0">
+        <img
+          src="/album_latest.webp"
+          alt=""
+          className="h-full w-full scale-110 object-cover blur-[120px] brightness-[0.4]"
+        />
+        <div className="absolute inset-0 bg-black/55" />
+      </div>
+
       {/* Animated grain texture */}
       <div className="absolute inset-0 opacity-[0.15]">
         <svg className="w-full h-full">

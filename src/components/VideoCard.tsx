@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import { Play } from "lucide-react";
+import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 interface VideoCardProps {
   title: string;
@@ -9,27 +10,7 @@ interface VideoCardProps {
 
 const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("animate-blur-fade-in");
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const cardRef = useRevealOnIntersect<HTMLDivElement>();
 
   const handlePlay = () => {
     setIsPlaying(true);
@@ -38,12 +19,10 @@ const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
   return (
     <div
       ref={cardRef}
-      className="opacity-0 group relative"
+      className="group relative w-full max-w-[640px] translate-y-0 opacity-0 transition-transform duration-500"
       style={{ animationDelay: `${delay}s` }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="aspect-video bg-card border border-border overflow-hidden relative">
+      <div className="relative aspect-video overflow-hidden border border-border bg-card">
         {!isPlaying ? (
           <>
             <img
@@ -54,13 +33,15 @@ const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
                 e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
               }}
             />
-            <div
-              className={`absolute inset-0 bg-background/80 flex items-center justify-center cursor-pointer transition-all duration-500 ${
-                isHovered ? "opacity-100" : "opacity-0"
-              }`}
-              onClick={handlePlay}
-            >
-              <Play className="w-16 h-16 text-foreground transition-transform duration-300 group-hover:scale-110" />
+            <div className="absolute inset-0 flex items-center justify-center bg-background/80 opacity-100 pointer-events-auto transition-all duration-500 md:pointer-events-none md:opacity-0 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
+              <button
+                type="button"
+                aria-label={`Play ${title}`}
+                onClick={handlePlay}
+                className="flex h-24 w-24 items-center justify-center border border-border/70 bg-background/70 text-foreground transition-transform duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 md:h-28 md:w-28 md:group-hover:scale-105 md:group-focus-within:scale-105"
+              >
+                <Play className="h-10 w-10 text-foreground transition-transform duration-300 md:h-12 md:w-12 md:group-hover:scale-110 md:group-focus-within:scale-110" />
+              </button>
             </div>
           </>
         ) : (
@@ -74,7 +55,9 @@ const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
         )}
       </div>
 
-      <h3 className="mt-4 text-lg font-light tracking-wider text-center">{title}</h3>
+      <h3 className="mt-5 text-center text-lg font-light tracking-[0.35em] text-foreground sm:text-xl">
+        {title}
+      </h3>
     </div>
   );
 };
