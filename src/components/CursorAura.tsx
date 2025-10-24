@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const REST_SCALE = 0.6;
 const ACTIVE_SCALE = 1.1;
 
 const CursorAura = () => {
+  const [isVisible, setIsVisible] = useState(false);
   const circleRef = useRef<HTMLDivElement | null>(null);
   const frameRef = useRef<number>();
   const idleTimeoutRef = useRef<number>();
@@ -11,10 +12,13 @@ const CursorAura = () => {
 
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)");
 
-    if (prefersReducedMotion.matches) {
+    if (prefersReducedMotion.matches || !hasFinePointer.matches) {
       return () => undefined;
     }
+
+    setIsVisible(true);
 
     const applyState = () => {
       frameRef.current = undefined;
@@ -49,6 +53,10 @@ const CursorAura = () => {
     };
 
     const handlePointerMove = (event: PointerEvent) => {
+      if (event.pointerType !== "mouse") {
+        return;
+      }
+
       latestState.current.x = event.clientX;
       latestState.current.y = event.clientY;
       latestState.current.scale = ACTIVE_SCALE;
@@ -74,7 +82,7 @@ const CursorAura = () => {
   }, []);
 
   return (
-    <div className="pointer-events-none fixed inset-0 z-[5]" aria-hidden="true">
+    <div className={`pointer-events-none fixed inset-0 z-[5]${isVisible ? "" : " hidden"}`} aria-hidden="true">
       <div
         ref={circleRef}
         className="absolute h-12 w-12 rounded-full border border-white/70 opacity-80 transition-transform duration-500 ease-out"

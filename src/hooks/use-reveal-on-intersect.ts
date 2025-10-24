@@ -2,14 +2,9 @@ import { useEffect, useRef } from "react";
 
 interface RevealOptions {
   selector?: string;
-  threshold?: number;
-  rootMargin?: string;
-  animateClass?: string;
 }
 
-export function useRevealOnIntersect<T extends HTMLElement>(
-  { selector, threshold = 0.1, rootMargin = "0px", animateClass = "animate-blur-fade-in" }: RevealOptions = {},
-) {
+export function useRevealOnIntersect<T extends HTMLElement>({ selector }: RevealOptions = {}) {
   const containerRef = useRef<T | null>(null);
 
   useEffect(() => {
@@ -26,38 +21,18 @@ export function useRevealOnIntersect<T extends HTMLElement>(
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
+    if (typeof window.requestAnimationFrame === "function") {
+      const frame = window.requestAnimationFrame(() => {
+        targets.forEach((target) => target.classList.remove("opacity-0"));
+      });
 
-          const target = entry.target as HTMLElement;
-          target.classList.remove("opacity-0");
-          if (animateClass) {
-            target.classList.add(animateClass);
-            const handleAnimationEnd = () => {
-              window.clearTimeout(fallbackTimeout);
-              target.classList.remove(animateClass);
-              target.removeEventListener("animationend", handleAnimationEnd);
-            };
-            const fallbackTimeout = window.setTimeout(() => {
-              target.classList.remove(animateClass);
-              target.removeEventListener("animationend", handleAnimationEnd);
-            }, 1200);
-            target.addEventListener("animationend", handleAnimationEnd, { once: true });
-          }
-          observer.unobserve(target);
-        });
-      },
-      { threshold, rootMargin },
-    );
+      return () => window.cancelAnimationFrame(frame);
+    }
 
-    targets.forEach((target) => observer.observe(target));
+    targets.forEach((target) => target.classList.remove("opacity-0"));
 
-    return () => observer.disconnect();
-  }, [selector, threshold, rootMargin, animateClass]);
+    return () => undefined;
+  }, [selector]);
 
   return containerRef;
 }
