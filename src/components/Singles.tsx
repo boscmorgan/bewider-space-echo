@@ -7,7 +7,7 @@ const SINGLES = [
     title: "ANOTHER HERO",
     spotify: "https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw",
     appleMusic: "https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB",
-    artwork: "/assets/another hero.jpg",
+    artwork: "/assets/albums/another hero copy.webp",
   },
   {
     title: "SAILS AWAY",

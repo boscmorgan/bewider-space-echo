@@ -4,7 +4,7 @@ const BackgroundAnimation = () => {
       {/* Blurred album backdrop */}
       <div className="absolute inset-0">
         <img
-          src="/album_latest.webp"
+          src="/assets/albums/ships-that-pass-in-the-night.jpg"
           alt=""
           className="h-full w-full scale-110 object-cover blur-[120px] brightness-[0.4]"
         />
