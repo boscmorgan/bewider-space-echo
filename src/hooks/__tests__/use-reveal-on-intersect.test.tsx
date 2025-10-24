@@ -39,7 +39,7 @@ describe("useRevealOnIntersect", () => {
       observe = observeMock;
       unobserve = unobserveMock;
       disconnect = disconnectMock;
-      takeRecords = vi.fn<[], IntersectionObserverEntry[]>(() => []);
+      takeRecords = vi.fn(() => [] as IntersectionObserverEntry[]);
     }
 
     vi.stubGlobal(

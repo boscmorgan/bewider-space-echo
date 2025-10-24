@@ -53,22 +53,12 @@ const Hero = () => {
               <Button
                 key={label}
                 variant={variant}
-                className={cn(
-                  "h-12 w-full min-w-[140px] border transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto",
-                  variant === "default"
-                    ? "border-transparent bg-white text-background hover:bg-white/85"
-                    : "border-white/50 bg-transparent text-white hover:bg-white/15"
-                )}
+                className="h-12 w-full min-w-[140px] border border-white/50 bg-transparent text-white transition-colors duration-300 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto"
                 asChild
               >
                 <a href={href} target="_blank" rel="noopener noreferrer">
-                  <Icon className={cn("!h-5 !w-5", variant === "default" ? "text-background" : "text-white")} />
-                  <span
-                    className={cn(
-                      "ml-2 text-[0.72rem] uppercase tracking-[0.24em] sm:text-[0.75rem]",
-                      variant === "default" ? "text-background" : "text-white"
-                    )}
-                  >
+                  <Icon className="!h-5 !w-5 text-white" />
+                  <span className="ml-2 text-[0.72rem] uppercase tracking-[0.24em] text-white sm:text-[0.75rem]">
                     {label}
                   </span>
                 </a>
