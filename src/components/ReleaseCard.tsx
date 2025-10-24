@@ -23,7 +23,7 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, delay = 0
         
         {hasAtmos && (
           <span className="absolute right-3 top-3 inline-flex items-center">
-            <DolbyAtmosIcon className="h-6 w-auto text-white" />
+            <DolbyAtmosIcon className="h-5 w-auto text-white" />
             <span className="sr-only">Dolby Atmos</span>
           </span>
         )}

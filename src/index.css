@@ -88,3 +88,25 @@ All colors MUST be HSL.
   -webkit-font-feature-settings: "liga";
   -webkit-font-smoothing: antialiased;
 }
+
+@keyframes hero-breath {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@layer utilities {
+  .hero-breath {
+    animation: hero-breath 18s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-breath {
+    animation: none;
+  }
+}

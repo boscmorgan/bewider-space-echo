@@ -16,8 +16,8 @@ const Index = () => {
       <SiteTitle />
       <div className="relative z-10">
         <Hero />
-        <Albums />
         <Singles />
+        <Albums />
         <Videos />
         <About />
         <Contact />

@@ -25,14 +25,14 @@ const Hero = () => {
     >
       <div className="fade-element w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
         <div className="flex flex-col items-center gap-8">
-          <div className="relative w-full max-w-xl">
+          <div className="relative w-full max-w-[520px] sm:max-w-[580px] lg:max-w-[640px] hero-breath">
             <img
               src="/album_latest.webp"
               alt="Bewider - Another Hero album artwork"
               className="aspect-square w-full object-cover shadow-[0_35px_80px_-40px_rgba(0,0,0,0.9)]"
             />
             <span className="absolute right-4 top-4 inline-flex items-center">
-              <DolbyAtmosIcon className="h-6 w-auto text-white" />
+              <DolbyAtmosIcon className="h-4 w-auto text-white" />
               <span className="sr-only">Dolby Atmos</span>
             </span>
           </div>
@@ -47,9 +47,11 @@ const Hero = () => {
                 className="h-12 w-full min-w-[120px] border border-white/50 bg-transparent text-white transition-colors duration-300 hover:bg-white/15 sm:w-auto"
                 asChild
               >
-                <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Listen on ${label}`}>
+                <a href={href} target="_blank" rel="noopener noreferrer">
                   <Icon className="!h-5 !w-5 text-white" />
-                  <span className="sr-only">{label}</span>
+                  <span className="text-[0.65rem] uppercase tracking-[0.55em] text-white sm:text-xs">
+                    {label}
+                  </span>
                 </a>
               </Button>
             ))}
