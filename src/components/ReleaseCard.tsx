@@ -57,7 +57,7 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
               aria-label={`Open ${title} on ${label}`}
             >
               <Icon className="h-5 w-5 text-white" aria-hidden="true" />
-              <span className="text-sm font-medium uppercase tracking-[0.3em]">{label}</span>
+              <span className="text-sm font-medium uppercase tracking-[0.18em]">{label}</span>
             </a>
           ))}
         </div>
@@ -72,7 +72,7 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded border border-white/30 bg-background/70 px-4 py-3 text-[0.75rem] font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            className="flex items-center justify-center gap-2 rounded border border-white/30 bg-background/70 px-4 py-3 text-sm font-semibold uppercase tracking-[0.16em] text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
             aria-label={`Open ${title} on ${label}`}
           >
             <Icon className="h-5 w-5 text-white" aria-hidden="true" />

@@ -31,6 +31,9 @@ const VIDEOS = [
 const Videos = () => {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <header className="mb-8 text-center sm:mb-12">
+        <p className="font-sans text-xs uppercase tracking-[0.35em] text-white/60 sm:text-sm">Videos</p>
+      </header>
       <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
         {VIDEOS.map((video, index) => (
           <VideoCard

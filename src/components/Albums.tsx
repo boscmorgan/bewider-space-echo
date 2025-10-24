@@ -5,8 +5,10 @@ const BANDCAMP_URL = "https://bewider.bandcamp.com/music";
 const ALBUMS = [
   {
     title: "SHIPS THAT PASS IN THE NIGHT",
+    spotify: "https://open.spotify.com/album/313C73VtZgXrA9S7Ybr1EC?si=3ndu3JERTeis76pjGRZjjg",
     appleMusic: "https://music.apple.com/us/album/ships-that-pass-in-the-night-ep/1838859940",
     artwork: "/assets/albums/ships-that-pass-in-the-night.jpg",
+    hasAtmos: true,
   },
   {
     title: "GYMNOPÉDIES REWORK",
@@ -37,6 +39,9 @@ const ALBUMS = [
 const Albums = () => {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <header className="mb-8 text-center sm:mb-12">
+        <p className="font-sans text-xs uppercase tracking-[0.35em] text-white/60 sm:text-sm">Albums &amp; EPs</p>
+      </header>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-12">
         {ALBUMS.map((album, index) => (
           <ReleaseCard

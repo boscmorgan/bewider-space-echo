@@ -1,17 +1,26 @@
 import { Button } from "@/components/ui/button";
-import { AppleMusicIcon, DolbyAtmosIcon, SpotifyIcon } from "@/components/StreamingIcons";
+import { AppleMusicIcon, BandcampIcon, SpotifyIcon } from "@/components/StreamingIcons";
+import { cn } from "@/lib/utils";
 import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 const STREAMING_LINKS = [
   {
-    label: "Spotify",
-    href: "https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw",
-    Icon: SpotifyIcon,
+    label: "Apple Music",
+    href: "https://music.apple.com/us/album/ships-that-pass-in-the-night-ep/1838859940",
+    Icon: AppleMusicIcon,
+    variant: "outline" as const,
   },
   {
-    label: "Apple Music",
-    href: "https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB",
-    Icon: AppleMusicIcon,
+    label: "Spotify",
+    href: "https://open.spotify.com/album/313C73VtZgXrA9S7Ybr1EC?si=3ndu3JERTeis76pjGRZjjg",
+    Icon: SpotifyIcon,
+    variant: "outline" as const,
+  },
+  {
+    label: "Bandcamp",
+    href: "https://bewider.bandcamp.com/album/ships-that-pass-in-the-night",
+    Icon: BandcampIcon,
+    variant: "outline" as const,
   },
 ];
 
@@ -23,7 +32,7 @@ const Hero = () => {
       className="relative flex min-h-screen items-center justify-center px-3 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-10 lg:pt-48"
       ref={heroRef}
     >
-      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 z-30 overflow-hidden">
         <div className="hero-spotlight hero-spotlight--primary" aria-hidden="true" />
         <div className="hero-spotlight hero-spotlight--secondary" aria-hidden="true" />
       </div>
@@ -31,29 +40,35 @@ const Hero = () => {
         <div className="flex flex-col items-center gap-8">
           <div className="relative w-full max-w-[520px] sm:max-w-[580px] lg:max-w-[640px] hero-breath">
             <img
-              src="/album_latest.webp"
-              alt="Bewider - Another Hero album artwork"
+              src="/assets/albums/ships-that-pass-in-the-night.jpg"
+              alt="Bewider - Ships That Pass In The Night cover artwork"
               className="aspect-square w-full object-cover shadow-[0_35px_80px_-40px_rgba(0,0,0,0.9)]"
             />
-            <span className="absolute right-4 top-4 inline-flex items-center">
-              <DolbyAtmosIcon className="h-4 w-auto text-white" />
-              <span className="sr-only">Dolby Atmos</span>
-            </span>
           </div>
           <p className="text-xs uppercase tracking-[0.6em] text-white/70 sm:text-sm">
-            Another Hero · Latest EP
+            Ships That Pass In The Night · Latest EP
           </p>
-          <div className="flex w-full max-w-xl flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
-            {STREAMING_LINKS.map(({ label, href, Icon }) => (
+          <div className="flex w-full max-w-2xl flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
+            {STREAMING_LINKS.map(({ label, href, Icon, variant }) => (
               <Button
                 key={label}
-                variant="outline"
-                className="h-12 w-full min-w-[120px] border border-white/50 bg-transparent text-white transition-colors duration-300 hover:bg-white/15 sm:w-auto"
+                variant={variant}
+                className={cn(
+                  "h-12 w-full min-w-[140px] border transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto",
+                  variant === "default"
+                    ? "border-transparent bg-white text-background hover:bg-white/85"
+                    : "border-white/50 bg-transparent text-white hover:bg-white/15"
+                )}
                 asChild
               >
                 <a href={href} target="_blank" rel="noopener noreferrer">
-                  <Icon className="!h-5 !w-5 text-white" />
-                  <span className="text-[0.65rem] uppercase tracking-[0.55em] text-white sm:text-xs">
+                  <Icon className={cn("!h-5 !w-5", variant === "default" ? "text-background" : "text-white")} />
+                  <span
+                    className={cn(
+                      "ml-2 text-[0.72rem] uppercase tracking-[0.24em] sm:text-[0.75rem]",
+                      variant === "default" ? "text-background" : "text-white"
+                    )}
+                  >
                     {label}
                   </span>
                 </a>

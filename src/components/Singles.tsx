@@ -8,7 +8,6 @@ const SINGLES = [
     spotify: "https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw",
     appleMusic: "https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB",
     artwork: "/assets/another hero.jpg",
-    hasAtmos: true,
   },
   {
     title: "SAILS AWAY",
@@ -33,6 +32,9 @@ const SINGLES = [
 const Singles = () => {
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
+      <header className="mb-8 text-center sm:mb-12">
+        <p className="font-sans text-xs uppercase tracking-[0.35em] text-white/60 sm:text-sm">Singles</p>
+      </header>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-12">
         {SINGLES.map((single, index) => (
           <ReleaseCard

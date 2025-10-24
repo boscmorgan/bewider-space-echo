@@ -5,6 +5,9 @@ const About = () => {
 
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-16 sm:px-6 lg:py-24" ref={sectionRef}>
+      <header className="mb-8 text-center sm:mb-12">
+        <p className="font-sans text-xs uppercase tracking-[0.35em] text-white/60 sm:text-sm">About</p>
+      </header>
       <div className="fade-element opacity-0" style={{ animationDelay: "0.15s" }}>
         <article className="relative overflow-hidden border border-border/60 bg-background/40 px-6 py-12 sm:px-10 lg:px-14">
           <div className="absolute inset-y-6 left-4 hidden w-px bg-foreground/30 sm:left-6 lg:block" aria-hidden="true" />
