@@ -1,5 +1,5 @@
 import { Music } from "lucide-react";
-import { AppleMusicIcon, BandcampIcon, DolbyAtmosIcon, SpotifyIcon } from "@/components/StreamingIcons";
+import { AppleMusicIcon, BandcampIcon, SpotifyIcon } from "@/components/StreamingIcons";
 import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 interface ReleaseCardProps {
@@ -39,12 +39,6 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
             <span className="sr-only">{`${title} placeholder artwork`}</span>
           </div>
         )}
-        {hasAtmos && (
-          <span className="absolute right-3 top-3 inline-flex items-center">
-            <DolbyAtmosIcon className="h-5 w-auto text-white" />
-            <span className="sr-only">Dolby Atmos</span>
-          </span>
-        )}
 
         <div className="pointer-events-none absolute inset-0 hidden flex-col items-center justify-center gap-3 bg-background/85 bg-gradient-to-b from-background/80 to-background/70 px-6 text-center opacity-0 md:pointer-events-auto md:flex md:opacity-0 md:[@media(hover:hover)]:group-hover:opacity-100 md:group-focus-within:opacity-100">
           {streamingLinks.map(({ href, label, Icon }) => (
@@ -80,6 +74,11 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
           </a>
         ))}
       </div>
+      {hasAtmos && (
+        <p className="mt-3 text-xs uppercase tracking-[0.3em] text-white/50">
+          Available in Stereo and Dolby Atmos
+        </p>
+      )}
     </div>
   );
 };

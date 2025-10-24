@@ -72,7 +72,7 @@ const SiteTitle = () => {
         <h1>
           <a
             href="/"
-            className="group inline-flex select-none gap-[0.02em] text-[clamp(3.5rem,12vw,11rem)] font-extralight uppercase leading-none tracking-tight text-white/95 transition-colors duration-300 ease-out hover:text-white"
+            className="group inline-flex select-none gap-[0.02em] text-[clamp(2.5rem,8vw,7rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
             aria-label="Bewider home"
             onPointerEnter={handlePointerEnter}
             onPointerMove={handlePointerMove}
@@ -84,7 +84,7 @@ const SiteTitle = () => {
                 ref={(element) => {
                   spanRefs.current[index] = element;
                 }}
-                className="px-[0.02em] transition-transform duration-300 ease-out will-change-transform hover:text-white focus-visible:text-white focus-visible:outline-none"
+                className="px-[0.02em] [@media(hover:hover)]:transition-transform [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out will-change-transform [@media(hover:hover)]:hover:text-white focus-visible:text-white focus-visible:outline-none"
               >
                 {letter}
               </span>

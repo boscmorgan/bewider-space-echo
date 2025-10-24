@@ -29,7 +29,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative flex min-h-screen items-center justify-center px-3 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-10 lg:pt-48"
+      className="relative flex min-h-[85vh] items-center justify-center px-3 pb-12 pt-24 sm:min-h-[90vh] sm:px-6 sm:pb-16 sm:pt-28 lg:px-10"
       ref={heroRef}
     >
       <div className="pointer-events-none absolute inset-0 z-30 overflow-hidden">
@@ -37,8 +37,8 @@ const Hero = () => {
         <div className="hero-spotlight hero-spotlight--secondary" aria-hidden="true" />
       </div>
       <div className="fade-element relative z-10 w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
-        <div className="flex flex-col items-center gap-8">
-          <div className="relative w-full max-w-[520px] sm:max-w-[580px] lg:max-w-[640px] hero-breath">
+        <div className="flex flex-col items-center gap-6 sm:gap-8">
+          <div className="relative w-full max-w-[360px] hero-breath sm:max-w-[420px] lg:max-w-[480px]">
             <img
               src="/assets/albums/ships-that-pass-in-the-night.jpg"
               alt="Bewider - Ships That Pass In The Night cover artwork"
@@ -53,7 +53,7 @@ const Hero = () => {
               <Button
                 key={label}
                 variant={variant}
-                className="h-12 w-full min-w-[140px] border border-white/50 bg-transparent text-white transition-colors duration-300 hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto"
+                className="h-12 w-full min-w-[140px] border border-white/50 bg-transparent text-white [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50 sm:w-auto"
                 asChild
               >
                 <a href={href} target="_blank" rel="noopener noreferrer">
@@ -65,6 +65,9 @@ const Hero = () => {
               </Button>
             ))}
           </div>
+          <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+            Available in Stereo and Dolby Atmos
+          </p>
         </div>
       </div>
     </section>
