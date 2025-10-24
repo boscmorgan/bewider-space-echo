@@ -33,9 +33,9 @@ const About = () => {
                 of repetition nurtures spontaneity.
               </p>
               <p className="max-w-xl lg:text-balance">
-                In 2021 Bewider released “Gymnopedies Rework”, a project realized during the lockdown period. It grew
+                In 2021 Bewider released “Gymnopédies Rework”, a project realized during the lockdown period. It grew
                 from modular synth experiments that evolved into a fully formed exploration. Erik Satie’s three
-                Gymnopedies have always resonated deeply—captivating melodies that continue to inspire.
+                Gymnopédies have always resonated deeply—captivating melodies that continue to inspire.
               </p>
             </div>
           </div>
