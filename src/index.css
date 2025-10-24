@@ -71,6 +71,20 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    * {
+      transition: none !important;
+    }
+    
+    .group:hover *,
+    *:hover {
+      transform: none !important;
+      scale: none !important;
+      opacity: inherit !important;
+    }
+  }
 }
 
 .material-symbols-outlined {

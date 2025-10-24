@@ -44,14 +44,14 @@ const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => 
                 event.currentTarget.src = fallback;
               }}
             />
-            <div className="absolute inset-0 flex items-center justify-center bg-background/80 opacity-100 pointer-events-auto transition-all duration-500 md:pointer-events-none md:opacity-0 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
+            <div className="absolute inset-0 flex items-center justify-center bg-background/80 opacity-100 pointer-events-auto md:pointer-events-none md:opacity-0 md:[@media(hover:hover)]:group-hover:pointer-events-auto md:[@media(hover:hover)]:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">
               <button
                 type="button"
                 aria-label={`Play ${title}`}
                 onClick={handlePlay}
-                className="flex h-24 w-24 items-center justify-center border border-border/70 bg-background/70 text-foreground transition-transform duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 md:h-28 md:w-28 md:group-hover:scale-105 md:group-focus-within:scale-105"
+                className="flex h-24 w-24 items-center justify-center border border-border/70 bg-background/70 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 md:h-28 md:w-28 md:group-focus-within:scale-105"
               >
-                <Play className="h-10 w-10 text-foreground transition-transform duration-300 md:h-12 md:w-12 md:group-hover:scale-110 md:group-focus-within:scale-110" />
+                <Play className="h-10 w-10 text-foreground md:h-12 md:w-12 md:group-focus-within:scale-110" />
               </button>
             </div>
           </>
