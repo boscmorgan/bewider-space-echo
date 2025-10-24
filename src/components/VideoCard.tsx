@@ -5,16 +5,20 @@ import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 interface VideoCardProps {
   title: string;
   videoId: string;
+  thumbnail?: string;
   delay?: number;
 }
 
-const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
+const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const cardRef = useRevealOnIntersect<HTMLDivElement>();
 
   const handlePlay = () => {
     setIsPlaying(true);
   };
+
+  const youtubeFallback = (quality: "maxresdefault" | "hqdefault") => `https://img.youtube.com/vi/${videoId}/${quality}.jpg`;
+  const posterImage = thumbnail ?? youtubeFallback("maxresdefault");
 
   return (
     <div
@@ -26,11 +30,18 @@ const VideoCard = ({ title, videoId, delay = 0 }: VideoCardProps) => {
         {!isPlaying ? (
           <>
             <img
-              src={`https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`}
+              src={posterImage}
               alt={title}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.currentTarget.src = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+              loading="lazy"
+              className="h-full w-full object-cover"
+              onError={(event) => {
+                const fallback = youtubeFallback("hqdefault");
+                if (event.currentTarget.dataset.fallbackApplied === "true" || posterImage === fallback) {
+                  return;
+                }
+
+                event.currentTarget.dataset.fallbackApplied = "true";
+                event.currentTarget.src = fallback;
               }}
             />
             <div className="absolute inset-0 flex items-center justify-center bg-background/80 opacity-100 pointer-events-auto transition-all duration-500 md:pointer-events-none md:opacity-0 md:group-hover:pointer-events-auto md:group-hover:opacity-100 md:group-focus-within:pointer-events-auto md:group-focus-within:opacity-100">

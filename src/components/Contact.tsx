@@ -10,7 +10,7 @@ const Contact = () => {
         <div className="flex flex-col items-center gap-8 text-center">
           <a
             href="mailto:info@bewider.net"
-            className="text-base font-light uppercase tracking-[0.45em] text-foreground transition-colors hover:text-muted-foreground sm:text-lg"
+            className="font-sans text-base font-semibold tracking-[0.18em] text-foreground transition-colors hover:text-muted-foreground sm:text-lg"
           >
             info@bewider.net
           </a>
@@ -45,10 +45,20 @@ const Contact = () => {
               </a>
             </div>
             <a
+              href="https://bewider.bandcamp.com/merch"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded border border-white/40 bg-background/70 px-6 py-3 font-sans text-sm font-semibold uppercase tracking-[0.2em] text-white transition-colors duration-200 hover:border-white/60 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:text-base"
+              aria-label="Open Bewider merch store on Bandcamp"
+            >
+              <span className="material-symbols-outlined text-2xl leading-none">shopping_bag</span>
+              <span>MERCH</span>
+            </a>
+            <a
               href="https://www.dropbox.com/scl/fo/s1tmmstkic5kc83121qfz/APnZWt21ladgHjkmLkeQ8-M?rlkey=czu6gwli00z1373q07w0fvlqz&dl=0"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 text-xs font-light uppercase tracking-[0.45em] text-foreground transition-colors hover:text-muted-foreground sm:text-sm"
+              className="flex items-center gap-2 font-sans text-sm font-medium uppercase tracking-[0.2em] text-foreground transition-colors hover:text-muted-foreground sm:text-base"
               aria-label="Download press kit"
             >
               <span className="material-symbols-outlined text-2xl leading-none">download</span>
@@ -59,7 +69,7 @@ const Contact = () => {
       </div>
 
       <div className="fade-element opacity-0" style={{ animationDelay: "0.45s" }}>
-        <p className="mt-12 text-center text-[0.55rem] uppercase tracking-[0.55em] text-muted-foreground/80 sm:text-[0.6rem]">
+        <p className="mt-12 font-sans text-center text-xs uppercase tracking-[0.28em] text-muted-foreground/80 sm:text-sm">
           © 2025 BEWIDER. All rights reserved.
         </p>
       </div>

@@ -4,18 +4,27 @@ const VIDEOS = [
   {
     title: "PANORAMA",
     videoId: "A4ivofgWkUM",
+    thumbnail: "/assets/videos/panorama.png",
   },
   {
     title: "SHAPING LIGHTS",
     videoId: "xowPZ487zVg",
+    thumbnail: "/assets/videos/shaping-lights.png",
   },
   {
     title: "CHROME",
     videoId: "YbbemHnF0BE",
+    thumbnail: "/assets/videos/chrome.png",
   },
   {
     title: "FOLLOWING THE RIVER FLOW",
     videoId: "Yr6HpHBn2cQ",
+    thumbnail: "/assets/videos/following-the-river-flow.png",
+  },
+  {
+    title: "LIVE SET",
+    videoId: "FQ9gLqYOzhQ",
+    thumbnail: "/assets/videos/live-set.png",
   },
 ];
 
@@ -28,6 +37,7 @@ const Videos = () => {
             key={video.videoId}
             title={video.title}
             videoId={video.videoId}
+            thumbnail={video.thumbnail}
             delay={index * 0.1}
           />
         ))}

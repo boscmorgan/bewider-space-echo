@@ -99,14 +99,62 @@ All colors MUST be HSL.
   }
 }
 
-@keyframes hero-spotlight {
+@keyframes hero-spotlight-cycle {
   0% {
     opacity: 0;
-    transform: translate(-72%, -62%) scale(0.5);
+    transform: translate(-120%, -55%) rotate(-30deg) scale(0.85);
+  }
+  12% {
+    opacity: 0.75;
+  }
+  28% {
+    opacity: 0.45;
+    transform: translate(-40%, -72%) rotate(-12deg) scale(1.05);
+  }
+  45% {
+    opacity: 0.6;
+    transform: translate(18%, -82%) rotate(0deg) scale(1.12);
+  }
+  62% {
+    opacity: 0.48;
+    transform: translate(72%, -64%) rotate(16deg) scale(1);
+  }
+  78% {
+    opacity: 0.68;
+    transform: translate(120%, -46%) rotate(28deg) scale(0.92);
+  }
+  90% {
+    opacity: 0.2;
   }
   100% {
-    opacity: 1;
-    transform: translate(-50%, -40%) scale(1);
+    opacity: 0;
+    transform: translate(-120%, -55%) rotate(-30deg) scale(0.85);
+  }
+}
+
+@keyframes hero-spotlight-cycle-soft {
+  0% {
+    opacity: 0;
+    transform: translate(-105%, -38%) rotate(-24deg) scale(0.72);
+  }
+  18% {
+    opacity: 0.4;
+  }
+  36% {
+    opacity: 0.62;
+    transform: translate(-18%, -58%) rotate(-10deg) scale(1);
+  }
+  54% {
+    opacity: 0.48;
+    transform: translate(42%, -52%) rotate(6deg) scale(1.1);
+  }
+  76% {
+    opacity: 0.58;
+    transform: translate(108%, -34%) rotate(18deg) scale(0.88);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-105%, -38%) rotate(-24deg) scale(0.72);
   }
 }
 
@@ -117,19 +165,28 @@ All colors MUST be HSL.
 
   .hero-spotlight {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: clamp(32rem, 55vw, 44rem);
+    top: 45%;
+    left: 50%;
+    width: clamp(34rem, 58vw, 48rem);
     aspect-ratio: 1 / 1;
-    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(17, 17, 17, 0) 75%);
-    filter: blur(60px);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.36) 0%, rgba(255, 255, 255, 0.18) 35%, rgba(255, 255, 255, 0.08) 55%, rgba(17, 17, 17, 0) 75%);
+    filter: blur(58px);
     opacity: 0;
-    transform: translate(-72%, -62%) scale(0.5);
+    transform: translate(-120%, -55%) rotate(-30deg) scale(0.85);
     mix-blend-mode: screen;
+    pointer-events: none;
   }
 
-  .animate-hero-spotlight {
-    animation: hero-spotlight 2s ease 0.75s forwards;
+  .hero-spotlight--primary {
+    animation: hero-spotlight-cycle 16s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+  }
+
+  .hero-spotlight--secondary {
+    width: clamp(30rem, 52vw, 44rem);
+    filter: blur(86px);
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.12) 40%, rgba(255, 255, 255, 0.04) 58%, rgba(17, 17, 17, 0) 78%);
+    animation: hero-spotlight-cycle-soft 18s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+    animation-delay: -9s;
   }
 }
 
@@ -138,9 +195,10 @@ All colors MUST be HSL.
     animation: none;
   }
 
-  .animate-hero-spotlight {
+  .hero-spotlight--primary,
+  .hero-spotlight--secondary {
     animation: none;
-    opacity: 0.6;
-    transform: translate(-50%, -40%) scale(1);
+    opacity: 0.5;
+    transform: translate(-25%, -60%) rotate(-12deg) scale(1);
   }
 }

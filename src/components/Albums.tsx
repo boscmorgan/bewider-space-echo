@@ -4,30 +4,33 @@ const BANDCAMP_URL = "https://bewider.bandcamp.com/music";
 
 const ALBUMS = [
   {
-    title: "ANOTHER HERO",
-    spotify: "https://open.spotify.com/album/7mZQvL7Vf1ebVoDIOxaTKp?si=XA6X1AIjT_C5cjFGzHjDjw",
-    appleMusic: "https://music.apple.com/it/album/another-hero/1752728681?i=1752728682&l=en-GB",
-    hasAtmos: true,
-  },
-  {
-    title: "A PLACE TO BE SAFE",
-    spotify: "https://open.spotify.com/album/0GpbxLUm4gQNIG8l60EP8N?si=hk8iN2wsSfWJ1D8L6G6tFA",
-    appleMusic: "https://music.apple.com/it/album/a-place-to-be-safe-ep/1508488727?l=en-GB",
-  },
-  {
-    title: "DISSOLVE",
-    spotify: "https://open.spotify.com/album/4z3zGQVk7zxKRlpElMwawI?si=xKBN1VChS9S8ej1H5YNfEw",
-    appleMusic: "https://music.apple.com/it/album/dissolve/1689876132?l=en-GB",
-  },
-  {
-    title: "FULL PANORAMA",
-    spotify: "https://open.spotify.com/album/4YwKcoUtyCXC4m079KKjw1?si=mZJiRC8TSoa7eyLUyjkTCQ",
-    appleMusic: "https://music.apple.com/it/album/full-panorama/1683514943?l=en-GB",
+    title: "SHIPS THAT PASS IN THE NIGHT",
+    appleMusic: "https://music.apple.com/us/album/ships-that-pass-in-the-night-ep/1838859940",
+    artwork: "/assets/albums/ships-that-pass-in-the-night.jpg",
   },
   {
     title: "GYMNOPÉDIES REWORK",
     spotify: "https://open.spotify.com/album/6DK0vyvhbJGmpoVdkG2mak?si=1XvYgsKJTOGs0jEhxjQwsg",
     appleMusic: "https://music.apple.com/it/album/gymnop%C3%A9dies-rework-single/1549207538?l=en-GB",
+    artwork: "/assets/albums/gymnopedies-rework.jpg",
+  },
+  {
+    title: "FULL PANORAMA",
+    spotify: "https://open.spotify.com/album/4YwKcoUtyCXC4m079KKjw1?si=mZJiRC8TSoa7eyLUyjkTCQ",
+    appleMusic: "https://music.apple.com/it/album/full-panorama/1683514943?l=en-GB",
+    artwork: "/assets/albums/full-panorama.jpg",
+  },
+  {
+    title: "DISSOLVE",
+    spotify: "https://open.spotify.com/album/4z3zGQVk7zxKRlpElMwawI?si=xKBN1VChS9S8ej1H5YNfEw",
+    appleMusic: "https://music.apple.com/it/album/dissolve/1689876132?l=en-GB",
+    artwork: "/assets/albums/dissolve.jpg",
+  },
+  {
+    title: "A PLACE TO BE SAFE",
+    spotify: "https://open.spotify.com/album/0GpbxLUm4gQNIG8l60EP8N?si=hk8iN2wsSfWJ1D8L6G6tFA",
+    appleMusic: "https://music.apple.com/it/album/a-place-to-be-safe-ep/1508488727?l=en-GB",
+    artwork: "/assets/albums/a-place-to-be-safe.jpg",
   },
 ];
 
@@ -43,6 +46,7 @@ const Albums = () => {
             appleMusic={album.appleMusic}
             bandcamp={BANDCAMP_URL}
             hasAtmos={album.hasAtmos}
+            artwork={album.artwork}
             delay={index * 0.1}
           />
         ))}

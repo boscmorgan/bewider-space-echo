@@ -24,7 +24,8 @@ const Hero = () => {
       ref={heroRef}
     >
       <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-        <div className="hero-spotlight animate-hero-spotlight" />
+        <div className="hero-spotlight hero-spotlight--primary" aria-hidden="true" />
+        <div className="hero-spotlight hero-spotlight--secondary" aria-hidden="true" />
       </div>
       <div className="fade-element relative z-10 w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
         <div className="flex flex-col items-center gap-8">
