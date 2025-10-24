@@ -37,6 +37,16 @@ export function useRevealOnIntersect<T extends HTMLElement>(
           target.classList.remove("opacity-0");
           if (animateClass) {
             target.classList.add(animateClass);
+            const handleAnimationEnd = () => {
+              window.clearTimeout(fallbackTimeout);
+              target.classList.remove(animateClass);
+              target.removeEventListener("animationend", handleAnimationEnd);
+            };
+            const fallbackTimeout = window.setTimeout(() => {
+              target.classList.remove(animateClass);
+              target.removeEventListener("animationend", handleAnimationEnd);
+            }, 1200);
+            target.addEventListener("animationend", handleAnimationEnd, { once: true });
           }
           observer.unobserve(target);
         });

@@ -2,6 +2,7 @@ import { useMemo, useRef } from "react";
 import type { PointerEvent as ReactPointerEvent } from "react";
 
 const TITLE = "BEWIDER";
+const LEFT_GROUP_COUNT = 2;
 const randomRotation = () => {
   const magnitude = 12 + Math.random() * 28;
   return (Math.random() > 0.5 ? 1 : -1) * magnitude;
@@ -9,6 +10,8 @@ const randomRotation = () => {
 
 const SiteTitle = () => {
   const letters = useMemo(() => TITLE.split(""), []);
+  const leftGroup = letters.slice(0, LEFT_GROUP_COUNT);
+  const rightGroup = letters.slice(LEFT_GROUP_COUNT);
   const spanRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const rotationsRef = useRef<number[]>(letters.map(() => 0));
 
@@ -72,23 +75,44 @@ const SiteTitle = () => {
         <h1>
           <a
             href="/"
-            className="group inline-flex select-none gap-[0.02em] text-[clamp(2.5rem,8vw,7rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
+            className="group flex w-full max-w-[min(440px,90vw)] select-none items-baseline justify-between text-[clamp(2.5rem,7vw,6.5rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
             aria-label="Bewider home"
             onPointerEnter={handlePointerEnter}
             onPointerMove={handlePointerMove}
             onPointerLeave={resetLetters}
           >
-            {letters.map((letter, index) => (
-              <span
-                key={`${letter}-${index}`}
-                ref={(element) => {
-                  spanRefs.current[index] = element;
-                }}
-                className="px-[0.02em] [@media(hover:hover)]:transition-transform [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out will-change-transform [@media(hover:hover)]:hover:text-white focus-visible:text-white focus-visible:outline-none"
-              >
-                {letter}
-              </span>
-            ))}
+            <span className="flex flex-1 justify-start gap-[0.04em]">
+              {leftGroup.map((letter, groupIndex) => {
+                const index = groupIndex;
+                return (
+                  <span
+                    key={`${letter}-${index}`}
+                    ref={(element) => {
+                      spanRefs.current[index] = element;
+                    }}
+                    className="px-[0.02em] text-left [@media(hover:hover)]:transition-transform [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out will-change-transform [@media(hover:hover)]:hover:text-white focus-visible:text-white focus-visible:outline-none"
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
+            </span>
+            <span className="flex flex-1 justify-end gap-[0.04em]">
+              {rightGroup.map((letter, groupIndex) => {
+                const index = groupIndex + LEFT_GROUP_COUNT;
+                return (
+                  <span
+                    key={`${letter}-${index}`}
+                    ref={(element) => {
+                      spanRefs.current[index] = element;
+                    }}
+                    className="px-[0.02em] text-right [@media(hover:hover)]:transition-transform [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out will-change-transform [@media(hover:hover)]:hover:text-white focus-visible:text-white focus-visible:outline-none"
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
+            </span>
           </a>
         </h1>
       </div>

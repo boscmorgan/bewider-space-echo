@@ -33,12 +33,6 @@ const BackgroundAnimation = () => {
           <rect width="100%" height="100%" filter="url(#noise)" opacity="0.5" />
         </svg>
       </div>
-      
-      {/* Floating circles */}
-      <div className="absolute top-[10%] left-[15%] w-64 h-64 border border-foreground/5 rounded-full animate-float-slow" />
-      <div className="absolute top-[60%] right-[20%] w-96 h-96 border border-foreground/5 rounded-full animate-float-slower" />
-      <div className="absolute bottom-[20%] left-[25%] w-48 h-48 border border-foreground/5 rounded-full animate-float-medium" />
-      
       {/* Grid lines */}
       <svg className="absolute inset-0 w-full h-full opacity-[0.02]">
         <defs>
@@ -48,10 +42,6 @@ const BackgroundAnimation = () => {
         </defs>
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
-      
-      {/* Scanning lines */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-foreground/10 to-transparent animate-scan-down" />
-      <div className="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-foreground/10 to-transparent animate-scan-right" />
       
       {/* Glowing orbs */}
       <div className="absolute top-[30%] right-[10%] w-2 h-2 bg-foreground/20 rounded-full blur-sm animate-pulse-slow" />

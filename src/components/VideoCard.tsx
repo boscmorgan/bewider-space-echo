@@ -23,7 +23,7 @@ const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => 
   return (
     <div
       ref={cardRef}
-      className="group relative w-full max-w-[640px] translate-y-0 opacity-0 transition-transform duration-500"
+      className="group relative w-full max-w-[600px] translate-y-0 opacity-0 transition-transform duration-500"
       style={{ animationDelay: `${delay}s` }}
     >
       <div className="relative aspect-video overflow-hidden border border-border bg-card">
@@ -49,9 +49,9 @@ const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => 
                 type="button"
                 aria-label={`Play ${title}`}
                 onClick={handlePlay}
-                className="flex h-24 w-24 items-center justify-center border border-border/70 bg-background/70 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 md:h-28 md:w-28 md:group-focus-within:scale-105"
+                className="flex h-20 w-20 items-center justify-center border border-border/70 bg-background/70 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground/40 md:h-24 md:w-24 md:group-focus-within:scale-105"
               >
-                <Play className="h-10 w-10 text-foreground md:h-12 md:w-12 md:group-focus-within:scale-110" />
+                <Play className="h-8 w-8 text-foreground md:h-10 md:w-10 md:group-focus-within:scale-110" />
               </button>
             </div>
           </>
@@ -66,7 +66,7 @@ const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => 
         )}
       </div>
 
-      <h3 className="mt-5 text-center text-lg font-light tracking-[0.35em] text-foreground sm:text-xl">
+      <h3 className="mt-4 text-center text-base font-light tracking-[0.3em] text-foreground sm:text-lg">
         {title}
       </h3>
     </div>

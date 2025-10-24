@@ -95,14 +95,14 @@ const FloatingPlayer = () => {
   }, []);
 
   return (
-    <aside className="fixed bottom-6 right-4 z-[60] flex items-center gap-2 sm:right-6">
+    <aside className="fixed bottom-6 right-4 z-[60] flex items-center gap-2 sm:right-8">
       <button
         type="button"
         onClick={() => {
           setIsCollapsed((previous) => !previous);
         }}
-        className={`grid h-9 w-9 place-items-center rounded border border-white/25 bg-background/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
-          isCollapsed ? "translate-x-[19.5rem]" : "translate-x-0"
+        className={`grid h-8 w-8 place-items-center rounded border border-white/25 bg-background/80 text-white shadow-lg backdrop-blur-sm transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 ${
+          isCollapsed ? "translate-x-[17.5rem]" : "translate-x-0"
         } transition-transform duration-300`}
         aria-label={isCollapsed ? "Show player" : "Hide player"}
       >
@@ -110,45 +110,45 @@ const FloatingPlayer = () => {
       </button>
 
       <div
-        className={`player-shell flex w-full max-w-xs items-center gap-3 rounded border border-white/25 bg-background/80 px-4 py-3 shadow-lg backdrop-blur-sm ${
+        className={`player-shell flex w-full max-w-xs items-center gap-2.5 rounded border border-white/25 bg-background/80 px-3.5 py-2.5 shadow-lg backdrop-blur-sm ${
           isCollapsed ? "player-shell--hidden" : ""
         }`}
       >
         <div className="flex-1">
-          <p className="text-[0.55rem] uppercase tracking-[0.35em] text-white/50">Now Playing</p>
-          <p className="truncate text-sm font-semibold text-white" title={queue[currentIndex].title}>
+          <p className="text-[0.5rem] uppercase tracking-[0.32em] text-white/50">Now Playing</p>
+          <p className="truncate text-xs font-medium text-white" title={queue[currentIndex].title}>
             {queue[currentIndex].title}
           </p>
         </div>
 
-      <div className="flex items-center gap-2">
-        <button
-          type="button"
-          onClick={toggleMute}
-          className="grid h-9 w-9 place-items-center rounded border border-white/25 text-white transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-          aria-label={isMuted ? "Unmute audio" : "Mute audio"}
-        >
-          {isMuted ? <VolumeX className="h-4 w-4" /> : <Volume2 className="h-4 w-4" />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleMute}
+            className="grid h-8 w-8 place-items-center rounded border border-white/25 text-white transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            aria-label={isMuted ? "Unmute audio" : "Mute audio"}
+          >
+            {isMuted ? <VolumeX className="h-3.5 w-3.5" /> : <Volume2 className="h-3.5 w-3.5" />}
+          </button>
 
-        <button
-          type="button"
-          onClick={togglePlay}
-          className="grid h-9 w-9 place-items-center rounded border border-white text-white transition-colors hover:border-white/70 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-          aria-label={isPlaying ? "Pause playback" : "Play playback"}
-        >
-          {isPlaying ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
-        </button>
+          <button
+            type="button"
+            onClick={togglePlay}
+            className="grid h-8 w-8 place-items-center rounded border border-white text-white transition-colors hover:border-white/70 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            aria-label={isPlaying ? "Pause playback" : "Play playback"}
+          >
+            {isPlaying ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+          </button>
 
-        <button
-          type="button"
-          onClick={handleNext}
-          className="grid h-9 w-9 place-items-center rounded border border-white/25 text-white transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-          aria-label="Play next track"
-        >
-          <SkipForward className="h-4 w-4" />
-        </button>
-      </div>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="grid h-8 w-8 place-items-center rounded border border-white/25 text-white transition-colors hover:border-white/60 hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            aria-label="Play next track"
+          >
+            <SkipForward className="h-3.5 w-3.5" />
+          </button>
+        </div>
       </div>
     </aside>
   );

@@ -38,11 +38,11 @@ const ALBUMS = [
 
 const Albums = () => {
   return (
-    <section className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 lg:py-24">
-      <header className="mb-8 text-center sm:mb-12">
-        <p className="font-sans text-xs uppercase tracking-[0.35em] text-white/60 sm:text-sm">Albums &amp; EPs</p>
+    <section className="mx-auto w-full max-w-6xl px-6 pt-8 pb-14 sm:px-10 lg:px-20 lg:pt-12 lg:pb-20">
+      <header className="mb-6 text-center sm:mb-10">
+        <p className="font-sans text-[0.6rem] uppercase tracking-[0.32em] text-white/60 sm:text-xs">Albums &amp; EPs</p>
       </header>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3 lg:gap-12">
+      <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-9 lg:grid-cols-3 lg:gap-10">
         {ALBUMS.map((album, index) => (
           <ReleaseCard
             key={album.title}

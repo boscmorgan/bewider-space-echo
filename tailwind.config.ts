@@ -88,12 +88,17 @@ export default {
         "blur-fade-in": {
           "0%": {
             opacity: "0",
-            filter: "blur(10px)",
-            transform: "translateY(20px)",
+            filter: "blur(14px)",
+            transform: "translateY(18px)",
+          },
+          "60%": {
+            opacity: "0.8",
+            filter: "blur(4px)",
+            transform: "translateY(6px)",
           },
           "100%": {
             opacity: "1",
-            filter: "blur(0px)",
+            filter: "none",
             transform: "translateY(0)",
           },
         },

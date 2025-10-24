@@ -70,6 +70,8 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-size: clamp(0.9rem, 0.8vw + 0.7rem, 1rem);
+    line-height: 1.5;
   }
 
   /* Disable hover effects on touch devices */
