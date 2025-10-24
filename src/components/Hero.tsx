@@ -23,7 +23,10 @@ const Hero = () => {
       className="relative flex min-h-screen items-center justify-center px-3 pb-16 pt-32 sm:px-6 sm:pt-36 lg:px-10 lg:pt-48"
       ref={heroRef}
     >
-      <div className="fade-element w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="hero-spotlight animate-hero-spotlight" />
+      </div>
+      <div className="fade-element relative z-10 w-full max-w-5xl opacity-0" style={{ animationDelay: "0.15s" }}>
         <div className="flex flex-col items-center gap-8">
           <div className="relative w-full max-w-[520px] sm:max-w-[580px] lg:max-w-[640px] hero-breath">
             <img

@@ -99,14 +99,48 @@ All colors MUST be HSL.
   }
 }
 
+@keyframes hero-spotlight {
+  0% {
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, -40%) scale(1);
+  }
+}
+
 @layer utilities {
   .hero-breath {
     animation: hero-breath 18s ease-in-out infinite;
+  }
+
+  .hero-spotlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: clamp(32rem, 55vw, 44rem);
+    aspect-ratio: 1 / 1;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 45%, rgba(17, 17, 17, 0) 75%);
+    filter: blur(60px);
+    opacity: 0;
+    transform: translate(-72%, -62%) scale(0.5);
+    mix-blend-mode: screen;
+  }
+
+  .animate-hero-spotlight {
+    animation: hero-spotlight 2s ease 0.75s forwards;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-breath {
     animation: none;
+  }
+
+  .animate-hero-spotlight {
+    animation: none;
+    opacity: 0.6;
+    transform: translate(-50%, -40%) scale(1);
   }
 }
