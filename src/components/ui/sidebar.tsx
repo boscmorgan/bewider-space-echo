@@ -19,6 +19,42 @@ const SIDEBAR_WIDTH_MOBILE = "18rem";
 const SIDEBAR_WIDTH_ICON = "3rem";
 const SIDEBAR_KEYBOARD_SHORTCUT = "b";
 
+function readSidebarCookie(): boolean | null {
+  if (typeof document === "undefined" || !document.cookie) {
+    return null;
+  }
+
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(`${SIDEBAR_COOKIE_NAME}=`));
+
+  if (!cookie) {
+    return null;
+  }
+
+  const [, rawValue] = cookie.split("=");
+  if (rawValue === undefined) {
+    return null;
+  }
+
+  let value: string;
+  try {
+    value = decodeURIComponent(rawValue);
+  } catch {
+    return null;
+  }
+
+  if (value === "true") {
+    return true;
+  }
+
+  if (value === "false") {
+    return false;
+  }
+
+  return null;
+}
+
 type SidebarContext = {
   state: "expanded" | "collapsed";
   open: boolean;
@@ -64,11 +100,24 @@ const SidebarProvider = React.forwardRef<
         _setOpen(openState);
       }
 
-      // This sets the cookie to keep the sidebar state.
+      // Persist the sidebar state to a cookie so it can be restored later.
       document.cookie = `${SIDEBAR_COOKIE_NAME}=${openState}; path=/; max-age=${SIDEBAR_COOKIE_MAX_AGE}`;
     },
     [setOpenProp, open],
   );
+
+  React.useEffect(() => {
+    if (openProp !== undefined) {
+      return;
+    }
+
+    const cookieState = readSidebarCookie();
+    if (cookieState === null || cookieState === _open) {
+      return;
+    }
+
+    _setOpen(cookieState);
+  }, [openProp, _open]);
 
   // Helper to toggle the sidebar.
   const toggleSidebar = React.useCallback(() => {
