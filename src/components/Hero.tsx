@@ -1,26 +1,21 @@
-import { Button } from "@/components/ui/button";
 import { AppleMusicIcon, BandcampIcon, SpotifyIcon } from "@/components/StreamingIcons";
-import { cn } from "@/lib/utils";
 import { useRevealOnIntersect } from "@/hooks/use-reveal-on-intersect";
 
 const STREAMING_LINKS = [
   {
-    label: "Apple Music",
-    href: "https://music.apple.com/us/album/ships-that-pass-in-the-night-ep/1838859940",
-    Icon: AppleMusicIcon,
-    variant: "outline" as const,
-  },
-  {
     label: "Spotify",
     href: "https://open.spotify.com/album/313C73VtZgXrA9S7Ybr1EC?si=3ndu3JERTeis76pjGRZjjg",
     Icon: SpotifyIcon,
-    variant: "outline" as const,
+  },
+  {
+    label: "Apple Music",
+    href: "https://music.apple.com/us/album/ships-that-pass-in-the-night-ep/1838859940",
+    Icon: AppleMusicIcon,
   },
   {
     label: "Bandcamp",
     href: "https://bewider.bandcamp.com/album/ships-that-pass-in-the-night",
     Icon: BandcampIcon,
-    variant: "outline" as const,
   },
 ];
 
@@ -49,18 +44,18 @@ const Hero = () => {
             Ships That Pass In The Night · Latest EP
           </p>
           <div className="flex w-full max-w-xs justify-center gap-2 sm:max-w-sm">
-            {STREAMING_LINKS.map(({ label, href, Icon, variant }) => (
-              <Button
+            {STREAMING_LINKS.map(({ label, href, Icon }) => (
+              <a
                 key={label}
-                variant={variant}
-                size="icon"
-                className="h-9 w-9 border border-white/30 bg-transparent text-white [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-                asChild
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Open Ships That Pass In The Night on ${label}`}
+                className="flex h-10 w-10 items-center justify-center rounded border border-white/30 bg-background/70 text-white shadow-[0_10px_24px_-18px_rgba(0,0,0,0.8)] [@media(hover:hover)]:transition-all [@media(hover:hover)]:duration-300 [@media(hover:hover)]:hover:border-white/60 [@media(hover:hover)]:hover:bg-white/12 [@media(hover:hover)]:hover:shadow-[0_0_28px_rgba(255,255,255,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
               >
-                <a href={href} target="_blank" rel="noopener noreferrer" aria-label={`Open on ${label}`}>
-                  <Icon className="!h-4 !w-4 text-white" />
-                </a>
-              </Button>
+                <Icon className="h-4 w-4 text-white" aria-hidden="true" />
+                <span className="sr-only">{`Open Ships That Pass In The Night on ${label}`}</span>
+              </a>
             ))}
           </div>
           <p className="text-[0.5rem] uppercase tracking-[0.22em] text-white/50">

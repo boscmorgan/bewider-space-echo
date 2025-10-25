@@ -71,17 +71,17 @@ const SiteTitle = () => {
 
   return (
     <header className="absolute left-0 top-0 z-40 w-full">
-      <div className="flex justify-start">
+      <div className="flex justify-center pt-6 sm:pt-8 lg:pt-10">
         <h1>
           <a
             href="/"
-            className="group flex w-full max-w-[min(440px,90vw)] select-none items-baseline justify-between text-[clamp(2.5rem,7vw,6.5rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
+            className="group flex w-full max-w-[min(420px,88vw)] select-none items-baseline justify-center text-[clamp(2.2rem,6vw,5.6rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
             aria-label="Bewider home"
             onPointerEnter={handlePointerEnter}
             onPointerMove={handlePointerMove}
             onPointerLeave={resetLetters}
           >
-            <span className="flex flex-1 justify-start gap-[0.04em]">
+            <span className="flex justify-end gap-[0.04em]">
               {leftGroup.map((letter, groupIndex) => {
                 const index = groupIndex;
                 return (
@@ -97,7 +97,8 @@ const SiteTitle = () => {
                 );
               })}
             </span>
-            <span className="flex flex-1 justify-end gap-[0.04em]">
+            <span className="w-0 transition-[width] duration-300 ease-out [@media(hover:hover)]:group-hover:w-[0.64em]" aria-hidden="true" />
+            <span className="flex justify-end gap-[0.04em]">
               {rightGroup.map((letter, groupIndex) => {
                 const index = groupIndex + LEFT_GROUP_COUNT;
                 return (

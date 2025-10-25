@@ -40,7 +40,7 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
           </div>
         )}
 
-        <div className="pointer-events-none absolute inset-0 hidden flex-col items-center justify-center gap-2.5 bg-background/85 bg-gradient-to-b from-background/80 to-background/70 px-4 text-center opacity-0 md:pointer-events-auto md:flex md:opacity-0 md:[@media(hover:hover)]:group-hover:opacity-100 md:group-focus-within:opacity-100">
+        <div className="pointer-events-none absolute inset-0 hidden items-center justify-center gap-2.5 bg-background/85 bg-gradient-to-b from-background/80 to-background/70 px-4 text-center opacity-0 md:pointer-events-auto md:flex md:flex-row md:opacity-0 md:[@media(hover:hover)]:group-hover:opacity-100 md:group-focus-within:opacity-100">
           {streamingLinks.map(({ href, label, Icon }) => (
             <a
               key={label}

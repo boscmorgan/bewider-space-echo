@@ -87,6 +87,14 @@ All colors MUST be HSL.
       opacity: inherit !important;
     }
   }
+
+  /* Hide the default cursor on desktop so only the custom aura remains visible */
+  @media (hover: hover) and (pointer: fine) {
+    body,
+    body * {
+      cursor: none !important;
+    }
+  }
 }
 
 .material-symbols-outlined {
