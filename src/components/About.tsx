@@ -41,6 +41,13 @@ const About = () => {
                 Gymnopédies have always resonated deeply—captivating melodies that continue to inspire.
               </p>
             </div>
+            <p className="max-w-3xl text-pretty">
+              In 2025, Bewider released <em>Ship That Pass in the Night</em>, his fourth album, which continues the sonic
+              journey begun with <em>Full Panorama</em>. Inspired by the imagery of ships traveling through the darkness, the
+              record explores themes of distance, connection, and solitude through immersive electronic and ambient
+              textures. Mixed both in stereo and Dolby Atmos, it reflects his ongoing passion for cinematic sound and
+              emotional storytelling.
+            </p>
           </div>
         </article>
       </div>

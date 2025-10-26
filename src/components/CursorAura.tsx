@@ -1,9 +1,61 @@
 import { useEffect, useRef, useState } from "react";
 
-const REST_SCALE = 0.6;
-const ACTIVE_SCALE = 1.1;
-const POINTER_ACTIVE_SCALE = 0.75;
-const POINTER_REST_SCALE = 0.55;
+const REST_SCALE = 0.55;
+const ACTIVE_SCALE = 0.95;
+const POINTER_ACTIVE_SCALE = 0.7;
+const POINTER_REST_SCALE = 0.5;
+const IDLE_TIMEOUT_MS = 110;
+
+const pointerCursorValues = new Set([
+  "pointer",
+  "grab",
+  "grabbing",
+  "move",
+  "crosshair",
+  "col-resize",
+  "row-resize",
+  "n-resize",
+  "s-resize",
+  "e-resize",
+  "w-resize",
+  "ne-resize",
+  "nw-resize",
+  "se-resize",
+  "sw-resize",
+  "ns-resize",
+  "ew-resize",
+  "nesw-resize",
+  "nwse-resize",
+]);
+
+const textInputTypes = new Set([
+  "text",
+  "search",
+  "email",
+  "password",
+  "url",
+  "tel",
+  "number",
+]);
+
+const textualTags = new Set([
+  "p",
+  "span",
+  "strong",
+  "em",
+  "li",
+  "article",
+  "section",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "blockquote",
+  "time",
+  "small",
+]);
 
 const CursorAura = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -34,7 +86,7 @@ const CursorAura = () => {
       const { x, y, scale } = latestState.current;
       circleRef.current.style.left = `${x}px`;
       circleRef.current.style.top = `${y}px`;
-      circleRef.current.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      circleRef.current.style.transform = `translate3d(-50%, -50%, 0) scale(${scale})`;
     };
 
     const scheduleFrame = () => {
@@ -54,40 +106,8 @@ const CursorAura = () => {
         latestState.current.scale =
           shapeRef.current === "beam" ? 1 : shapeRef.current === "pointer" ? POINTER_REST_SCALE : REST_SCALE;
         scheduleFrame();
-      }, 180);
+      }, IDLE_TIMEOUT_MS);
     };
-
-    const pointerCursorValues = new Set([
-      "pointer",
-      "grab",
-      "grabbing",
-      "move",
-      "crosshair",
-      "col-resize",
-      "row-resize",
-      "n-resize",
-      "s-resize",
-      "e-resize",
-      "w-resize",
-      "ne-resize",
-      "nw-resize",
-      "se-resize",
-      "sw-resize",
-      "ns-resize",
-      "ew-resize",
-      "nesw-resize",
-      "nwse-resize",
-    ]);
-
-    const textInputTypes = new Set([
-      "text",
-      "search",
-      "email",
-      "password",
-      "url",
-      "tel",
-      "number",
-    ]);
 
     const hasPointerIntent = (element: Element | null): boolean => {
       let current: Element | null = element;
@@ -109,24 +129,6 @@ const CursorAura = () => {
       return false;
     };
 
-    type DocumentWithCaret = Document & {
-      caretPositionFromPoint?: (x: number, y: number) => { offsetNode: Node | null } | null;
-      caretRangeFromPoint?: (x: number, y: number) => Range | null;
-    };
-
-    const isMeaningfulTextNode = (node: Node | null): boolean => {
-      if (!node || node.nodeType !== Node.TEXT_NODE) {
-        return false;
-      }
-
-      const content = node.textContent;
-      if (!content) {
-        return false;
-      }
-
-      return content.trim().length > 0;
-    };
-
     const shouldBeam = (event: PointerEvent): boolean => {
       const target = event.target as Element | null;
 
@@ -134,7 +136,9 @@ const CursorAura = () => {
         return false;
       }
 
-      const editableAncestor = target.closest("textarea, [contenteditable]");
+      const editableAncestor = target.closest(
+        "textarea, [contenteditable=''], [contenteditable='true'], [contenteditable='plaintext-only']",
+      );
       if (editableAncestor) {
         return true;
       }
@@ -157,25 +161,19 @@ const CursorAura = () => {
         return false;
       }
 
-      const doc = document as DocumentWithCaret;
-
-      try {
-        if (doc.caretPositionFromPoint) {
-          const position = doc.caretPositionFromPoint(event.clientX, event.clientY);
-          if (position?.offsetNode && isMeaningfulTextNode(position.offsetNode)) {
-            return true;
-          }
-        } else if (doc.caretRangeFromPoint) {
-          const range = doc.caretRangeFromPoint(event.clientX, event.clientY);
-          if (range?.startContainer && isMeaningfulTextNode(range.startContainer)) {
-            return true;
-          }
+      if (target instanceof HTMLElement) {
+        const computedCursor = window.getComputedStyle(target).cursor;
+        if (computedCursor === "text" || computedCursor === "caret" || computedCursor === "vertical-text") {
+          return true;
         }
-      } catch {
-        // Ignore failures from browser-specific implementations
+
+        if (textualTags.has(target.tagName.toLowerCase())) {
+          return true;
+        }
       }
 
-      return false;
+      const parentTextual = target.closest("p, span, article, section, li, blockquote, h1, h2, h3, h4, h5, h6");
+      return Boolean(parentTextual);
     };
 
     const shouldPointer = (event: PointerEvent): boolean => {
@@ -248,8 +246,8 @@ const CursorAura = () => {
       <div
         ref={circleRef}
         data-shape={shape}
-        className="absolute h-12 w-12 rounded-full border border-white/70 bg-transparent opacity-80 transition-[transform,width,height,border-radius,background-color,opacity,box-shadow,border] duration-300 ease-out data-[shape=beam]:h-12 data-[shape=beam]:w-[3px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/90 data-[shape=beam]:opacity-100 data-[shape=beam]:shadow-[0_0_18px_rgba(255,255,255,0.4)] data-[shape=pointer]:h-9 data-[shape=pointer]:w-9 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/60 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-90 data-[shape=pointer]:shadow-[0_0_16px_rgba(255,255,255,0.28)]"
-        style={{ left: "-120px", top: "-120px", transform: "translate(-50%, -50%) scale(0.6)" }}
+        className="absolute h-12 w-12 rounded-full border border-white/60 bg-transparent opacity-80 transition-[transform,width,height,border-radius,background-color,opacity,box-shadow,border] duration-150 ease-linear will-change-transform data-[shape=beam]:h-12 data-[shape=beam]:w-[2px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/80 data-[shape=beam]:opacity-90 data-[shape=beam]:shadow-[0_0_12px_rgba(255,255,255,0.3)] data-[shape=pointer]:h-8 data-[shape=pointer]:w-8 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/50 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-85 data-[shape=pointer]:shadow-[0_0_10px_rgba(255,255,255,0.2)]"
+        style={{ left: "-120px", top: "-120px", transform: `translate3d(-50%, -50%, 0) scale(${REST_SCALE})` }}
       />
     </div>
   );

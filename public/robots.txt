@@ -1,14 +1,17 @@
+# Bewider search crawler directives
 User-agent: Googlebot
 Allow: /
 
 User-agent: Bingbot
 Allow: /
 
-User-agent: Twitterbot
+User-agent: GPTBot
 Allow: /
 
-User-agent: facebookexternalhit
+User-agent: ChatGPT-User
 Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://bewider.space/sitemap.xml
