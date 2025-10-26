@@ -28,6 +28,10 @@ const ReleaseCard = ({ title, spotify, appleMusic, bandcamp, hasAtmos, artwork, 
             src={artwork}
             alt={`${title} cover artwork`}
             loading="lazy"
+            decoding="async"
+            width="600"
+            height="600"
+            sizes="(min-width: 1024px) 260px, (min-width: 640px) 45vw, 80vw"
             className="h-full w-full object-cover [@media(hover:hover)]:transition-transform [@media(hover:hover)]:duration-500 [@media(hover:hover)]:group-hover:scale-105 group-focus-within:scale-105"
           />
         ) : (

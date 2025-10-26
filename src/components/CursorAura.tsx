@@ -1,9 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 
-const REST_SCALE = 0.6;
-const ACTIVE_SCALE = 1.1;
-const POINTER_ACTIVE_SCALE = 0.75;
-const POINTER_REST_SCALE = 0.55;
+const REST_SCALE = 0.55;
+const ACTIVE_SCALE = 1;
+const POINTER_ACTIVE_SCALE = 0.7;
+const POINTER_REST_SCALE = 0.5;
+
+const POINTER_CURSOR_VALUES = new Set([
+  "pointer",
+  "grab",
+  "grabbing",
+  "move",
+  "crosshair",
+  "col-resize",
+  "row-resize",
+  "n-resize",
+  "s-resize",
+  "e-resize",
+  "w-resize",
+  "ne-resize",
+  "nw-resize",
+  "se-resize",
+  "sw-resize",
+  "ns-resize",
+  "ew-resize",
+  "nesw-resize",
+  "nwse-resize",
+]);
+
+const TEXT_INPUT_TYPES = new Set([
+  "text",
+  "search",
+  "email",
+  "password",
+  "url",
+  "tel",
+  "number",
+]);
 
 const CursorAura = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,40 +86,8 @@ const CursorAura = () => {
         latestState.current.scale =
           shapeRef.current === "beam" ? 1 : shapeRef.current === "pointer" ? POINTER_REST_SCALE : REST_SCALE;
         scheduleFrame();
-      }, 180);
+      }, 90);
     };
-
-    const pointerCursorValues = new Set([
-      "pointer",
-      "grab",
-      "grabbing",
-      "move",
-      "crosshair",
-      "col-resize",
-      "row-resize",
-      "n-resize",
-      "s-resize",
-      "e-resize",
-      "w-resize",
-      "ne-resize",
-      "nw-resize",
-      "se-resize",
-      "sw-resize",
-      "ns-resize",
-      "ew-resize",
-      "nesw-resize",
-      "nwse-resize",
-    ]);
-
-    const textInputTypes = new Set([
-      "text",
-      "search",
-      "email",
-      "password",
-      "url",
-      "tel",
-      "number",
-    ]);
 
     const hasPointerIntent = (element: Element | null): boolean => {
       let current: Element | null = element;
@@ -99,7 +99,7 @@ const CursorAura = () => {
           return false;
         }
 
-        if (pointerCursorValues.has(cursor)) {
+        if (POINTER_CURSOR_VALUES.has(cursor)) {
           return true;
         }
 
@@ -142,7 +142,7 @@ const CursorAura = () => {
       const inputAncestor = target.closest("input");
       if (inputAncestor) {
         if (inputAncestor instanceof HTMLInputElement) {
-          if (textInputTypes.has((inputAncestor.type || "text").toLowerCase())) {
+          if (TEXT_INPUT_TYPES.has((inputAncestor.type || "text").toLowerCase())) {
             return true;
           }
           return false;
@@ -248,8 +248,8 @@ const CursorAura = () => {
       <div
         ref={circleRef}
         data-shape={shape}
-        className="absolute h-12 w-12 rounded-full border border-white/70 bg-transparent opacity-80 transition-[transform,width,height,border-radius,background-color,opacity,box-shadow,border] duration-300 ease-out data-[shape=beam]:h-12 data-[shape=beam]:w-[3px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/90 data-[shape=beam]:opacity-100 data-[shape=beam]:shadow-[0_0_18px_rgba(255,255,255,0.4)] data-[shape=pointer]:h-9 data-[shape=pointer]:w-9 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/60 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-90 data-[shape=pointer]:shadow-[0_0_16px_rgba(255,255,255,0.28)]"
-        style={{ left: "-120px", top: "-120px", transform: "translate(-50%, -50%) scale(0.6)" }}
+        className="absolute h-12 w-12 rounded-full border border-white/70 bg-transparent opacity-80 transition-[opacity,transform] duration-150 ease-out will-change-transform data-[shape=beam]:h-12 data-[shape=beam]:w-[3px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/90 data-[shape=beam]:opacity-100 data-[shape=beam]:shadow-[0_0_18px_rgba(255,255,255,0.28)] data-[shape=pointer]:h-9 data-[shape=pointer]:w-9 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/50 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-90 data-[shape=pointer]:shadow-[0_0_12px_rgba(255,255,255,0.2)]"
+        style={{ left: "-120px", top: "-120px", transform: "translate(-50%, -50%) scale(0.55)" }}
       />
     </div>
   );

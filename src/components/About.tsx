@@ -29,22 +29,29 @@ const About = () => {
                 modern touch.
               </p>
             </div>
-            <div className="grid gap-10 lg:grid-cols-2">
-              <p className="max-w-xl text-pretty">
-                The first full-length album, “Full Panorama”, is an electronic and highly performative body of work. Each
-                track emerged from hands-on manipulations and recordings on analog modular synthesizers, where the rarity
-                of repetition nurtures spontaneity.
-              </p>
-              <p className="max-w-xl text-pretty">
-                In 2021 Bewider released “Gymnopédies Rework”, a project realized during the lockdown period. It grew
-                from modular synth experiments that evolved into a fully formed exploration. Erik Satie’s three
-                Gymnopédies have always resonated deeply—captivating melodies that continue to inspire.
-              </p>
-            </div>
+          <div className="grid gap-10 lg:grid-cols-2">
+            <p className="max-w-xl text-pretty">
+              The first full-length album, “Full Panorama”, is an electronic and highly performative body of work. Each
+              track emerged from hands-on manipulations and recordings on analog modular synthesizers, where the rarity
+              of repetition nurtures spontaneity.
+            </p>
+            <p className="max-w-xl text-pretty">
+              In 2021 Bewider released “Gymnopédies Rework”, a project realized during the lockdown period. It grew
+              from modular synth experiments that evolved into a fully formed exploration. Erik Satie’s three
+              Gymnopédies have always resonated deeply—captivating melodies that continue to inspire.
+            </p>
           </div>
-        </article>
-      </div>
-    </section>
+          <p className="max-w-3xl text-pretty">
+            In 2025, Bewider released Ship That Pass in the Night, his fourth album, which continues the sonic journey
+            begun with Full Panorama. Inspired by the imagery of ships traveling through the darkness, the record
+            explores themes of distance, connection, and solitude through immersive electronic and ambient textures.
+            Mixed both in stereo and Dolby Atmos, it reflects his ongoing passion for cinematic sound and emotional
+            storytelling.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
   );
 };
 

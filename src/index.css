@@ -88,11 +88,9 @@ All colors MUST be HSL.
     }
   }
 
-  /* Hide the default cursor on desktop so only the custom aura remains visible */
   @media (hover: hover) and (pointer: fine) {
-    body,
-    body * {
-      cursor: none !important;
+    body {
+      cursor: default;
     }
   }
 }
