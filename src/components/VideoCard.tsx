@@ -33,6 +33,9 @@ const VideoCard = ({ title, videoId, thumbnail, delay = 0 }: VideoCardProps) => 
               src={posterImage}
               alt={title}
               loading="lazy"
+              decoding="async"
+              width="1280"
+              height="720"
               className="h-full w-full object-cover"
               onError={(event) => {
                 const fallback = youtubeFallback("hqdefault");

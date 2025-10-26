@@ -24,7 +24,7 @@ const Hero = () => {
 
   return (
     <section
-      className="relative flex min-h-[80vh] items-center justify-center px-6 pb-10 pt-20 sm:min-h-[85vh] sm:px-12 sm:pb-14 sm:pt-24 lg:px-20"
+      className="relative flex min-h-[80vh] items-center justify-center px-6 pb-10 pt-28 sm:min-h-[85vh] sm:px-12 sm:pb-14 sm:pt-32 lg:px-20 lg:pt-36"
       ref={heroRef}
     >
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
@@ -37,6 +37,10 @@ const Hero = () => {
             <img
               src="/assets/albums/ships-that-pass-in-the-night.jpg"
               alt="Bewider - Ships That Pass In The Night cover artwork"
+              loading="lazy"
+              decoding="async"
+              width="1200"
+              height="1200"
               className="aspect-square w-full object-cover shadow-[0_35px_80px_-40px_rgba(0,0,0,0.9)]"
             />
           </div>

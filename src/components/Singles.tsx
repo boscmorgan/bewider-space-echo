@@ -31,7 +31,10 @@ const SINGLES = [
 
 const Singles = () => {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 pt-14 pb-10 sm:px-10 lg:px-20 lg:pt-20 lg:pb-16">
+    <section
+      id="music"
+      className="mx-auto w-full max-w-6xl px-6 pt-14 pb-10 sm:px-10 lg:px-20 lg:pt-20 lg:pb-16"
+    >
       <header className="mb-6 text-center sm:mb-10">
         <p className="font-sans text-[0.6rem] uppercase tracking-[0.32em] text-white/60 sm:text-xs">Singles</p>
       </header>
