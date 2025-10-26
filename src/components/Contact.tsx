@@ -5,7 +5,11 @@ const Contact = () => {
   const sectionRef = useRevealOnIntersect<HTMLDivElement>({ selector: ".fade-element" });
 
   return (
-    <section className="mx-auto w-full max-w-4xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20" ref={sectionRef}>
+    <section
+      id="contact"
+      className="mx-auto w-full max-w-4xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20"
+      ref={sectionRef}
+    >
       <div className="fade-element w-full opacity-0" style={{ animationDelay: "0.2s" }}>
         <div className="flex flex-col items-center gap-8 text-center">
           <a

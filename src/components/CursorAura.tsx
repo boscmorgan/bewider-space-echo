@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 
 const REST_SCALE = 0.6;
-const ACTIVE_SCALE = 1.1;
-const POINTER_ACTIVE_SCALE = 0.75;
-const POINTER_REST_SCALE = 0.55;
+const ACTIVE_SCALE = 1.05;
+const POINTER_ACTIVE_SCALE = 0.72;
+const POINTER_REST_SCALE = 0.52;
 
 const CursorAura = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -54,162 +54,25 @@ const CursorAura = () => {
         latestState.current.scale =
           shapeRef.current === "beam" ? 1 : shapeRef.current === "pointer" ? POINTER_REST_SCALE : REST_SCALE;
         scheduleFrame();
-      }, 180);
+      }, 110);
     };
 
-    const pointerCursorValues = new Set([
-      "pointer",
-      "grab",
-      "grabbing",
-      "move",
-      "crosshair",
-      "col-resize",
-      "row-resize",
-      "n-resize",
-      "s-resize",
-      "e-resize",
-      "w-resize",
-      "ne-resize",
-      "nw-resize",
-      "se-resize",
-      "sw-resize",
-      "ns-resize",
-      "ew-resize",
-      "nesw-resize",
-      "nwse-resize",
-    ]);
-
-    const textInputTypes = new Set([
-      "text",
-      "search",
-      "email",
-      "password",
-      "url",
-      "tel",
-      "number",
-    ]);
-
-    const hasPointerIntent = (element: Element | null): boolean => {
-      let current: Element | null = element;
-
-      while (current) {
-        const cursor = window.getComputedStyle(current).cursor;
-
-        if (cursor === "text") {
-          return false;
-        }
-
-        if (pointerCursorValues.has(cursor)) {
-          return true;
-        }
-
-        current = current.parentElement;
-      }
-
-      return false;
-    };
-
-    type DocumentWithCaret = Document & {
-      caretPositionFromPoint?: (x: number, y: number) => { offsetNode: Node | null } | null;
-      caretRangeFromPoint?: (x: number, y: number) => Range | null;
-    };
-
-    const isMeaningfulTextNode = (node: Node | null): boolean => {
-      if (!node || node.nodeType !== Node.TEXT_NODE) {
-        return false;
-      }
-
-      const content = node.textContent;
-      if (!content) {
-        return false;
-      }
-
-      return content.trim().length > 0;
-    };
-
-    const shouldBeam = (event: PointerEvent): boolean => {
-      const target = event.target as Element | null;
-
-      if (!target) {
-        return false;
-      }
-
-      const editableAncestor = target.closest("textarea, [contenteditable]");
-      if (editableAncestor) {
-        return true;
-      }
-
-      const inputAncestor = target.closest("input");
-      if (inputAncestor) {
-        if (inputAncestor instanceof HTMLInputElement) {
-          if (textInputTypes.has((inputAncestor.type || "text").toLowerCase())) {
-            return true;
-          }
-          return false;
-        }
-      }
-
-      if (target.closest("a, button, [role='button'], [role='link']")) {
-        return false;
-      }
-
-      if (hasPointerIntent(target)) {
-        return false;
-      }
-
-      const doc = document as DocumentWithCaret;
-
-      try {
-        if (doc.caretPositionFromPoint) {
-          const position = doc.caretPositionFromPoint(event.clientX, event.clientY);
-          if (position?.offsetNode && isMeaningfulTextNode(position.offsetNode)) {
-            return true;
-          }
-        } else if (doc.caretRangeFromPoint) {
-          const range = doc.caretRangeFromPoint(event.clientX, event.clientY);
-          if (range?.startContainer && isMeaningfulTextNode(range.startContainer)) {
-            return true;
-          }
-        }
-      } catch {
-        // Ignore failures from browser-specific implementations
-      }
-
-      return false;
-    };
-
-    const shouldPointer = (event: PointerEvent): boolean => {
-      const target = event.target as Element | null;
-
-      if (!target) {
-        return false;
-      }
-
-      if (target.closest("button, [role='button'], [role='menuitem'], [role='option'], [role='tab'], [role='switch'], label")) {
-        return true;
-      }
-
-      if (target.closest("a, [role='link']")) {
-        return true;
-      }
-
-      if (hasPointerIntent(target)) {
-        return true;
-      }
-
-      return false;
-    };
+    const TEXT_INPUT_SELECTOR =
+      "textarea, [contenteditable='true'], [contenteditable='plaintext-only'], input[type='text'], input[type='search'], input[type='email'], input[type='password'], input[type='url'], input[type='tel'], input:not([type])";
+    const INTERACTIVE_SELECTOR =
+      "button, a[href], [role='button'], [role='link'], [role='menuitem'], [role='option'], [role='tab'], [role='switch'], label, summary";
 
     const handlePointerMove = (event: PointerEvent) => {
       if (event.pointerType !== "mouse") {
         return;
       }
 
+      const target = event.target as Element | null;
       let nextShape: "circle" | "beam" | "pointer" = "circle";
 
-      if (shouldBeam(event)) {
+      if (target?.closest(TEXT_INPUT_SELECTOR)) {
         nextShape = "beam";
-      } else if (shouldPointer(event)) {
+      } else if (target?.closest(INTERACTIVE_SELECTOR)) {
         nextShape = "pointer";
       }
 
@@ -248,7 +111,7 @@ const CursorAura = () => {
       <div
         ref={circleRef}
         data-shape={shape}
-        className="absolute h-12 w-12 rounded-full border border-white/70 bg-transparent opacity-80 transition-[transform,width,height,border-radius,background-color,opacity,box-shadow,border] duration-300 ease-out data-[shape=beam]:h-12 data-[shape=beam]:w-[3px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/90 data-[shape=beam]:opacity-100 data-[shape=beam]:shadow-[0_0_18px_rgba(255,255,255,0.4)] data-[shape=pointer]:h-9 data-[shape=pointer]:w-9 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/60 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-90 data-[shape=pointer]:shadow-[0_0_16px_rgba(255,255,255,0.28)]"
+        className="absolute h-12 w-12 rounded-full border border-white/70 bg-transparent opacity-80 transition-[transform,width,height,border-radius,background-color,opacity,box-shadow,border] duration-150 ease-out will-change-transform data-[shape=beam]:h-12 data-[shape=beam]:w-[3px] data-[shape=beam]:rounded-full data-[shape=beam]:border-transparent data-[shape=beam]:bg-white/90 data-[shape=beam]:opacity-100 data-[shape=beam]:shadow-[0_0_12px_rgba(255,255,255,0.28)] data-[shape=pointer]:h-9 data-[shape=pointer]:w-9 data-[shape=pointer]:rounded-full data-[shape=pointer]:border-white/60 data-[shape=pointer]:bg-white/10 data-[shape=pointer]:opacity-90 data-[shape=pointer]:shadow-[0_0_12px_rgba(255,255,255,0.22)]"
         style={{ left: "-120px", top: "-120px", transform: "translate(-50%, -50%) scale(0.6)" }}
       />
     </div>

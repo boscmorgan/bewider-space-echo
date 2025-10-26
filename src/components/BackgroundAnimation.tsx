@@ -6,6 +6,11 @@ const BackgroundAnimation = () => {
         <img
           src="/assets/albums/ships-that-pass-in-the-night.jpg"
           alt=""
+          loading="lazy"
+          decoding="async"
+          fetchPriority="low"
+          width="1920"
+          height="1920"
           className="h-full w-full scale-110 object-cover blur-[120px] brightness-[0.4]"
         />
         <div className="absolute inset-0 bg-black/55" />

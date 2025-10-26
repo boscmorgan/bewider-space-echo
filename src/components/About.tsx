@@ -4,7 +4,11 @@ const About = () => {
   const sectionRef = useRevealOnIntersect<HTMLDivElement>({ selector: ".fade-element" });
 
   return (
-    <section className="mx-auto w-full max-w-5xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20" ref={sectionRef}>
+    <section
+      id="about"
+      className="mx-auto w-full max-w-5xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20"
+      ref={sectionRef}
+    >
       <header className="mb-6 text-center sm:mb-10">
         <p className="font-sans text-[0.6rem] uppercase tracking-[0.32em] text-white/60 sm:text-xs">About</p>
       </header>
@@ -41,6 +45,12 @@ const About = () => {
                 Gymnopédies have always resonated deeply—captivating melodies that continue to inspire.
               </p>
             </div>
+            <p className="max-w-3xl text-pretty">
+              In 2025, Bewider released <em>Ship That Pass in the Night</em>, his fourth album, which continues the sonic journey
+              begun with <em>Full Panorama</em>. Inspired by the imagery of ships traveling through the darkness, the record explores
+              themes of distance, connection, and solitude through immersive electronic and ambient textures. Mixed both in stereo
+              and Dolby Atmos, it reflects his ongoing passion for cinematic sound and emotional storytelling.
+            </p>
           </div>
         </article>
       </div>

@@ -71,11 +71,11 @@ const SiteTitle = () => {
 
   return (
     <header className="absolute left-0 top-0 z-40 w-full">
-      <div className="flex justify-center pt-6 sm:pt-8 lg:pt-10">
+      <div className="flex justify-center pt-6 pb-6 sm:pt-8 sm:pb-8 lg:pt-10 lg:pb-10">
         <h1>
           <a
             href="/"
-            className="group flex w-full max-w-[min(420px,88vw)] select-none items-baseline justify-center text-[clamp(2.2rem,6vw,5.6rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
+            className="group flex w-full max-w-[min(400px,86vw)] select-none items-baseline justify-center text-[clamp(1.9rem,5vw,5rem)] font-extralight uppercase leading-none tracking-tight text-white/95 [@media(hover:hover)]:transition-colors [@media(hover:hover)]:duration-300 [@media(hover:hover)]:ease-out [@media(hover:hover)]:hover:text-white"
             aria-label="Bewider home"
             onPointerEnter={handlePointerEnter}
             onPointerMove={handlePointerMove}

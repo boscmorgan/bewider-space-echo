@@ -30,7 +30,10 @@ const VIDEOS = [
 
 const Videos = () => {
   return (
-    <section className="mx-auto w-full max-w-6xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20">
+    <section
+      id="videos"
+      className="mx-auto w-full max-w-6xl px-6 py-14 sm:px-10 lg:px-20 lg:py-20"
+    >
       <header className="mb-6 text-center sm:mb-10">
         <p className="font-sans text-[0.6rem] uppercase tracking-[0.32em] text-white/60 sm:text-xs">Videos</p>
       </header>
