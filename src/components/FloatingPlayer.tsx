@@ -27,8 +27,10 @@ const FloatingPlayer = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const handleNext = useCallback(() => {
-    setCurrentIndex((previous) => (previous + 1) % queue.length);
-    setIsPlaying(true);
+    setIsPlaying((wasPlaying) => {
+      setCurrentIndex((previous) => (previous + 1) % queue.length);
+      return wasPlaying;
+    });
   }, [queue.length]);
 
   useEffect(() => {
