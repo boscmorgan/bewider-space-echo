@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+Base color tokens MUST be HSL; only gradients that require transparency may use RGBA.
 */
 
 @font-face {
